@@ -4,6 +4,8 @@ from sqlalchemy.orm import relationship
 
 # models
 from models.conexion_bd import Base
+from models.receta_ingrediente import RecetaIngrediente
+from models.ingrediente import Ingrediente
 
 class Receta(Base):
 
@@ -14,7 +16,7 @@ class Receta(Base):
     tiempo = Column(Integer)
     tipo = Column(String)
 
-    ingredientes = relationship('RecetaIngrediente', backref="receta_id")
+    ingredientes = relationship(RecetaIngrediente, backref="receta")
 
     def __init__(self, nombre, descripcion, tiempo, tipo):
         self.nombre = nombre
@@ -33,4 +35,11 @@ class Receta(Base):
             tiempo=self.tiempo,
             tipo=self.tipo
         )
-        
+    
+    def obten_lista_ingredientes(self, session):
+        lista = []
+        if self.ingredientes is not None:
+            for ingrediente in self.ingredientes:
+                modelo = session.query(Ingrediente).get(ingrediente.ingrediente_id)
+                lista.append(modelo.to_dict())
+        return lista

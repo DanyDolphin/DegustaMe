@@ -7,7 +7,7 @@ from models.conexion_bd import Base
 class Ingrediente(Base):
 
     __tablename__ = 'ingrediente'
-    receta_id = Column(Integer, primary_key=True)
+    ingrediente_id = Column(Integer, primary_key=True)
     nombre = Column(String)
     medida = Column(String)
     proteinas = Column(Numeric)
@@ -28,7 +28,7 @@ class Ingrediente(Base):
         Regresa una representación del modelo en un diccionario
         '''
         return dict(
-            receta_id=self.receta_id,
+            ingrediente_id=self.ingrediente_id,
             nombre=self.nombre,
             medida=self.medida,
             proteinas=self.proteinas,
