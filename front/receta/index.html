@@ -14,8 +14,8 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="./styles.css">
   </head>
 
   <body>
@@ -63,42 +63,85 @@
     </nav>
 
     <!-- content -->
-    <div class="container pt-5">
-      <h1 id="title">Todas las recetas</h1>
-
-      <!-- filters -->
-      <!--
-      <div class="d-inline-flex">
-        <select class="form-select me-3" aria-label="Tipo de platillo">
-          <option selected>Tipo de platillo</option>
-          <option value="1">Postre</option>
-          <option value="2">Acompañamiento</option>
-          <option value="3">Plato fuerte</option>
-          <option value="4">Plato ligero</option>
-          <option value="5">Vegetariano</option>
-        </select>
-
-        <select class="form-select" aria-label="Ingrediente principal">
-          <option selected>Ingrediente principal</option>
-          <option value="1">Ingrediente 1</option>
-          <option value="2">Ingrediente 2</option>
-          <option value="3">Ingrediente 3</option>
-          <option value="4">Ingrediente 4</option>
-          <option value="5">Ingrediente 5</option>
-        </select>
-      </div>
-      -->
-
+    <div class="container py-5">
+    
       <div id="loader" class="text-center mt-4 visually-hidden">
-        <div class="skeleton skeleton-receta"></div>
+        <div class="spinner-border spinner-big" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
 
-      <div id="empty" class="text-center mt-4 visually-hidden">
-        <h2>No se encontraron recetas</h2>
+      <div id="content" class="row">
+        <div class="col-lg-8">
+          <div class="d-flex">
+            <h1 id="title" class="me-5">
+              <div class="skeleton skeleton-h1"></div>
+            </h1>
+            <img src="../shared/img/heart.svg" alt="Añadir a favoritos"/>
+          </div>
+          <span id="type" class="badge bg-secondary me-2"></span>
+          <span id="time" class="badge bg-secondary">Badge 1</span>
+
+          <h2 class="mt-4">Ingredientes</h2>
+          <ul id="ingredients">
+            <li>
+              <div class="skeleton skeleton-text"></div>
+            </li>
+          </ul>
+
+          <h2 class="mt-4">Preparación</h2>
+          <div id="description">
+            <div class="skeleton skeleton-text"></div>
+          </div>
+
+          <!--
+          <h2 class="mt-5 mb-2">También te puede interesar</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <p class="h2 card-title">Receta 2</p>
+                  <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <p class="h2 card-title">Receta 2</p>
+                  <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Valor nutricional</h2>
+              <ul>
+                <li>
+                  Calorías: <div id="calorias" class="d-inline-block">
+                    <div class="skeleton skeleton-valor"></div>
+                  </div>
+                </li>
+                <li>
+                  Grasas: <div id="grasas" class="d-inline-block">
+                    <div class="skeleton skeleton-valor"></div>
+                  </div>
+                </li>
+                <li>
+                  Proteínas: <div id="proteinas" class="d-inline-block">
+                    <div class="skeleton skeleton-valor"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div id="list" class="mt-4"></div>
-
     </div>
 
     <!-- footer -->
