@@ -6,3 +6,10 @@ engine = create_engine('mysql://degustame_user:d3gust4m3123$@degustame.cqvzuclhb
 
 Base = declarative_base()
 Session = sessionmaker(bind = engine)
+
+#Datos 
+#mysql://degustame_user:d3gust4m3123$@degustame.cqvzuclhbvcr.us-west-1.rds.amazonaws.com/degustame')
+#usuario = degustame_user
+#password = d3gust4m3123$
+#host = degustame.cqvzuclhbvcr.us-west-1.rds.amazonaws.com
+#database = degustame

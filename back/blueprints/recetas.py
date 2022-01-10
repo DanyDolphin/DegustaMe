@@ -1,12 +1,15 @@
 # flask
+from models.usuario_receta import UsuarioReceta
+from models.usuario_ingrediente import UsuarioIngrediente
 from flask import Blueprint,jsonify,request,g
 
 #models
 from models.conexion_bd import Session
 from models.receta import Receta
 from models.ingrediente import Ingrediente
-
+from .auth import login_required
 bp = Blueprint('recetas', __name__, url_prefix='/recetas')
+
 
 @bp.route('/', methods=['GET'])
 def consultar_lista_recetas():
@@ -43,3 +46,24 @@ def buscar_recetas(query):
         r.append(receta)
     session.close()
     return jsonify(r)
+
+
+
+@bp.route('/seguimiento', methods=['GET'])
+@login_required
+def seguimiento_recetas():
+    session = Session()
+    seguimiento_ingredientes= session.query(UsuarioIngrediente).filter(UsuarioIngrediente.nombre_usuario==g.usuario.nombre_usuario)
+    seguimiento_recetas= session.query(UsuarioReceta).filter(UsuarioReceta.nombre_usuario==g.usuario.nombre_usuario)
+    ingredientes = []
+    recetas = []
+    for ing in seguimiento_ingredientes:
+        ingrediente=session.query(Ingrediente).get(ing.ingrediente_id)
+        ingredientes.append(ingrediente.to_dict())
+    for rec in seguimiento_recetas:
+        receta=session.query(Receta).get(rec.receta_id)
+        recetas.append(receta.to_dict())
+    return jsonify({'ingredientes':ingredientes,'recetas':recetas})
+        
+
+    
