@@ -14,6 +14,9 @@ create table usuario (
                          contrasena varchar(500) not null,
                          edad int(3) not null,
                          peso int(3) not null,
+                         dieta varchar(100) not null,
+                         genero varchar(100) not null,
+                         padecimientos varchar(100) not null,
                          altura int(4) not null
 )ENGINE=InnoDB;
 

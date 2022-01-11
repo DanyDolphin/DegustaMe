@@ -36,7 +36,7 @@ def registrarse():
   padecimiento=request.json['padecimiento']
   tipo_dieta=request.json['tipo_dieta']
   usuario = Usuario(nombre_usuario, correo, generate_password_hash(contrasena), edad, peso, padecimiento, genero, tipo_dieta, altura)
-  
+  print(usuario)
   usr=session.query(Usuario).get(nombre_usuario)
   corr= session.query(Usuario).filter(Usuario.correo==correo).first()
 
@@ -64,7 +64,9 @@ def iniciar_sesion():
 
   if user and check_password_hash(user.contrasena, request.json['contrasena']):
     token = jwt.encode({'sub': user.nombre_usuario}, current_app.config['SECRET_KEY'])
-    return jsonify({'token' : token.decode('UTF-8')})
+    print("Excelente")
+    print(token)
+    return jsonify({'token' : token})
   else:
     return jsonify(dict(
       mensaje='usuario o contraseña incorrectos'

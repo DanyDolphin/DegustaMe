@@ -9,7 +9,7 @@ from models.conexion_bd import Base
 class Usuario(Base):
 
     __tablename__ = 'usuario'
-    nombre_usuario=Column(String,PrimaryKey=True)
+    nombre_usuario=Column(String,primary_key=True)
     correo=Column(String)
     contrasena=Column(String)
     edad=Column(Integer)
