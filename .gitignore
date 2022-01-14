@@ -321,7 +321,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-
+front/.angular/*
 # System files
 .DS_Store
 Thumbs.db
