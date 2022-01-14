@@ -23,11 +23,14 @@ create table usuario (
 
 drop table if exists receta;
 create table receta (
-                        receta_id int(8) not null primary key,
-                        nombre varchar(100) not null,
-                        descripcion text not null,
-                        tiempo int(3) not null,
-                        tipo varchar(100) not null
+
+    receta_id int(8) not null primary key,
+    nombre varchar(100) not null,
+    descripcion text not null,
+    tiempo int(3) not null,
+    tipo varchar(100) not null,
+    imagen text not null
+
 )ENGINE=InnoDB;
 
 drop table if exists usuario_receta;
