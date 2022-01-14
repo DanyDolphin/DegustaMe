@@ -38,7 +38,8 @@ create table receta (
     nombre varchar(100) not null,
     descripcion text not null,
     tiempo int(3) not null,
-    tipo varchar(100) not null
+    tipo varchar(100) not null,
+    imagen text not null
 )ENGINE=InnoDB;
 
 drop table if exists usuario_receta;
