@@ -23,56 +23,58 @@ from wtforms.validators import InputRequired, Length, ValidationError, Email
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/signin', methods=['POST'])
+@bp.route('/registro', methods=['POST'])
 def registrarse():
   session = Session()
-  username = request.json['username']
+  nombre_usuario = request.json['usuario']
   correo = request.json['correo']
-  contrasena= request.json['contrasena']
-  
-  usuario=Usuario(username,correo,generate_password_hash(contrasena))
-  
-  usr=session.query(usuario.__class__).get(username)
-  corr= session.query(usuario.__class__).filter(usuario.__class__.correo ==correo).first()
+  contrasena=request.json['contrasena']
+  genero=request.json['genero']
+  altura=request.json['altura']
+  peso=request.json['peso']
+  edad=request.json['edad']
+  padecimiento=request.json['padecimiento']
+  tipo_dieta=request.json['tipo_dieta']
+  usuario = Usuario(nombre_usuario, correo, generate_password_hash(contrasena), edad, peso, padecimiento, genero, tipo_dieta, altura)
+  print(usuario)
+  usr=session.query(Usuario).get(nombre_usuario)
+  corr= session.query(Usuario).filter(Usuario.correo==correo).first()
 
   if usr or corr:
     msg="username" if usr else "correo" 
-    return jsonify(f"server: El {msg} ya se encuentra en uso"), 400
-
+    return jsonify(dict(
+      mensaje= "server: El {msg} ya se encuentra en uso"
+    )), 400
   try:
     session.add(usuario)
     session.commit()
   except:
     session.rollback()
-    return jsonify("server: Ha ocurrido un error intenta mas tarde"), 401
+    return jsonify(dict(
+      mensaje= "server: Ha ocurrido un error intenta mas tarde")), 500 
 
   return jsonify("server: Usuario registrado.")
 
-'''
-class LoginForm(FlaskForm):
-  username = StringField(validators=[InputRequired(), Length(min=4, max=20)])
-  password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)])
-  es_comprador = BooleanField(validators=[InputRequired()])
-  submit = SubmitField("Continuar")
-'''
 
 @bp.route('/login', methods=['POST'])
 def iniciar_sesion():
   session = Session()
-  
-  user = session.query(Usuario).filter(Usuario.username == request.json['username']).first()
 
-  if user and check_password_hash(user.contrasenia, request.json['password']):
-    token = jwt.encode({'sub': user.username}, current_app.config['SECRET_KEY'])
-    return jsonify({'token' : token.decode('UTF-8')})
+  user = session.query(Usuario).filter(Usuario.nombre_usuario == request.json['usuario']).first()
+
+  if user and check_password_hash(user.contrasena, request.json['contrasena']):
+    token = jwt.encode({'sub': user.nombre_usuario}, current_app.config['SECRET_KEY'])
+    print("Excelente")
+    print(token)
+    return jsonify({'token' : token})
   else:
     return jsonify(dict(
       mensaje='usuario o contraseña incorrectos'
     )), 401
 
+
 @bp.route('/logout', methods=['POST'])
 def cerrar_sesion():
-  # TODO: cerrar sesión
   pass
 
 @bp.before_app_request
@@ -99,7 +101,7 @@ def load_user():
       g.user = None
     else:
       user_dict = dict(
-        username=user.username,
+        username=user.nombre_usuario,
         correo=user.correo
       )
       g.user = user_dict
