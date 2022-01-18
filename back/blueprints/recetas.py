@@ -24,6 +24,19 @@ def consultar_lista_recetas():
     session.close()
     return jsonify(r)
 
+@bp.route('/recomendaciones/', methods=['GET'])
+def consultar_recomendaciones():
+    session = Session()
+    recetas = session.query(Receta).all()
+    r = []
+    for receta in recetas:
+        ingredientes = receta.obten_lista_ingredientes(session)
+        receta = receta.to_dict()
+        receta['ingredientes'] = ingredientes
+        r.append(receta)
+    session.close()
+    return jsonify(r)
+
 @bp.route('/<id>', methods=['GET'])
 def consultar_receta(id):
     session = Session()

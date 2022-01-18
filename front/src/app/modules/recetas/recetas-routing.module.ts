@@ -11,6 +11,12 @@ const routes: Routes = [
     path: 'seguimiento', 
     component: SeguimientoRecetasComponent
   },{
+    path: 'recomendaciones',
+    component: ListaRecetasComponent
+  },{
+    path: 'busqueda/:query',
+    component: ListaRecetasComponent
+  },{
     path: ':receta',
     component: DetallesRecetaComponent
   }
