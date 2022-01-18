@@ -1,1 +1,48 @@
-<p>navbar works!</p>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand me-4" routerLink="/">DegustaMe</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbar-content"
+      aria-controls="navbar-content"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-content">
+      <form class="d-flex mb-2 mb-lg-0 flex-grow-1 me-5" onsubmit="onSearchSubmit(event)">
+        <input
+          id="search"
+          class="form-control me-2"
+          type="search"
+          placeholder="Buscar receta / alimento"
+          aria-label="Search"
+        />
+        <button class="btn btn-success" type="submit">
+          <img src="/assets/search.svg" alt="Buscar">
+        </button>
+      </form>
+      <ul class="navbar-nav">
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/auth/login">Iniciar Sesión</a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menú
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/perfil">Mi perfil</a></li>
+            <li><a class="dropdown-item" routerLink="/crear-receta">Crear receta</a></li>
+            <li><a class="dropdown-item" routerLink="/recomendaciones">Recomendaciones</a></li>
+            <li><a class="dropdown-item" routerLink="/seguimiento">Seguimiento</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="text-danger">Cerrar sesión</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

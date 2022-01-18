@@ -6,6 +6,7 @@ import { ListaRecetasComponent } from './pages/lista-recetas/lista-recetas.compo
 import { DetallesRecetaComponent } from './pages/detalles-receta/detalles-receta.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     RecetasRoutingModule,
     SharedModule,
     FormsModule,
