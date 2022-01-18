@@ -13,7 +13,6 @@ export class AppComponent {
 
    ngOnInit() {
     const token = localStorage.getItem('token')
-    const es_comprador = JSON.parse(localStorage.getItem('es_comprador') || 'false')
     this.servicioAuth.isAuthenticated.next(token !== null)
    }
 }
