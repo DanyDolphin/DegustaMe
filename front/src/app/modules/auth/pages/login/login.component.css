@@ -1,0 +1,16 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #9266CC;/*#a1c4fd*/
+  
+    /* Chrome 10-25, Safari 5.1-6 
+    background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))*/
+    background: linear-gradient(to right, #9266CC, #E8E1F5);
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
+    background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))*/
+    background: linear-gradient(to right, #9266CC, #E8E1F5);
+}
+
+.text-mor{
+    color: #9266CC;
+}

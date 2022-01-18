@@ -8,18 +8,21 @@ import { AgregarRecetaComponent } from './pages/agregar-receta/agregar-receta.co
 import { FormIngredienteComponent } from './pages/agregar-receta/form-ingrediente/form-ingrediente.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
+import { SeguimientoRecetasComponent } from './pages/seguimiento-recetas/seguimiento-recetas.component';
 
 @NgModule({
   declarations: [
     ListaRecetasComponent,
     AgregarRecetaComponent,
     DetallesRecetaComponent,
-    FormIngredienteComponent
-    
+    FormIngredienteComponent,
+    DetallesRecetaComponent,
+    SeguimientoRecetasComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     RecetasRoutingModule,
     SharedModule,
     FormsModule,
