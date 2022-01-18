@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { API_BASE } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,12 @@ export class AuthService {
 
 
   registrarse(user:any): Observable<any> {
-    return this.http.post('http://127.0.0.1:5000/auth/signin', user);
+    return this.http.post(`${API_BASE}/auth/signin`, user);
   }
 
 
   iniciarSesion(user:any): Observable<any> {
-    return this.http.post('http://127.0.0.1:5000/auth/login', user)
+    return this.http.post(`${API_BASE}/auth/login`, user)
   }
 
   /*

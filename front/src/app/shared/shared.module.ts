@@ -3,26 +3,21 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { SkeletonComponent } from './skeleton/skeleton.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent,
-    SkeletonComponent
+    FooterComponent
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule
+    RouterModule
   ],
   exports: [
     NavbarComponent,
-    FooterComponent,
-    SkeletonComponent
+    FooterComponent
   ]
 })
 export class SharedModule { }

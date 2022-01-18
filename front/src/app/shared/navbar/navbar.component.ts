@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,20 +9,13 @@ import { AuthService } from '../services/auth.service';
 export class NavbarComponent implements OnInit {
   
   isLoggedIn = false
-  busqueda = ''
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.authService.isAuthenticated.subscribe(v => this.isLoggedIn = v)
-  }
-
-  onSearchSubmit(event: Event) {
-    event.preventDefault()
-    this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
   }
 
 }
