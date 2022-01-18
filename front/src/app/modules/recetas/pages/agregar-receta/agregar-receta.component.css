@@ -1,0 +1,14 @@
+.background {
+    /* fallback for old browsers */
+    background-color: #9266CC;
+    background: linear-gradient(to right, #9266CC, #AA8DD8);
+}
+
+.line {
+    border-bottom: solid 1px grey;
+}
+
+
+.bg-white {
+    background-color: white;
+}
