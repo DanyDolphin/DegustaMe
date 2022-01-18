@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RecetasService } from 'src/app/shared/services/recetas.service';
 
 @Component({
   selector: 'app-detalles-receta',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetallesRecetaComponent implements OnInit {
 
-  constructor() { }
+  receta: any
+
+  constructor(
+    private recetasService: RecetasService,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  get descripcion(): string {
+    return this.receta?.descripcion?.replace(/\n/g, '<br/>')
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.recetasService.obtenReceta(params['id'])
+        .subscribe(receta => {
+          this.receta = receta
+          console.log(receta)
+        })
+    })
+    
   }
 
 }

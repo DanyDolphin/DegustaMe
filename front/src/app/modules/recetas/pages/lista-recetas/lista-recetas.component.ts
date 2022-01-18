@@ -43,6 +43,7 @@ export class ListaRecetasComponent implements OnInit {
             .subscribe((recetas: any[]) => {
               this.titulo = `${recetas.length} resultados para "${decodeURIComponent(params['query'])}"`
               this.recetas = recetas
+              console.log(recetas)
             })
         })
     }

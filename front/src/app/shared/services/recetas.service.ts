@@ -16,6 +16,10 @@ export class RecetasService {
     return this.http.get(`${API_BASE}/recetas/`)
   }
 
+  obtenReceta(id: string) {
+    return this.http.get(`${API_BASE}/recetas/${id}`)
+  }
+
   buscarRecetas(query: string): Observable<any[]> {
     return this.http.get<any[]>(`${API_BASE}/recetas/search/${encodeURIComponent(query)}`)
   }

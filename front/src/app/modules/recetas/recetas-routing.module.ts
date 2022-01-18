@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'busqueda/:query',
     component: ListaRecetasComponent
   },{
-    path: ':receta',
+    path: ':id',
     component: DetallesRecetaComponent
   }
 ];

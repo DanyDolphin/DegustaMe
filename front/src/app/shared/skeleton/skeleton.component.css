@@ -21,3 +21,11 @@
 .skeleton.skeleton-receta {
   height: 136px;
 }
+
+.skeleton-valor {
+  min-width: 100px;
+  width: 100px;
+  display: inline-block;
+  margin-bottom: -2px;
+  height: 16px;
+}
