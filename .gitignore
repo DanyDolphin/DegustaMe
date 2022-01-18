@@ -322,6 +322,8 @@ libpeerconnection.log
 testem.log
 typings
 
+/typings
+front/.angular/*
 # System files
 .DS_Store
 Thumbs.db

@@ -1,1 +1,160 @@
-<p>signin works!</p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Registro</title>
+        <link rel="icon" href="../../assets/img/Logo.png" type="image/x-icon">
+
+        <link href="signin.component.css" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <section class="h-100 h-custom gradient-custom-2">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <form [formGroup] = "exform">
+                                                <h3 class="fw-normal mb-5" style="color: #9266CC;">Información general</h3>
+                                                <div class="row">
+                                                    <div class="">
+                                                        <!--col-md-6 mb-4 pb-2--->
+                                                        <!--Nombre de usuario --->
+                                                        <div class="form-group mb-3">
+                                                            <input formControlName="username" type="text" class="form-control" id="floatingInput" 
+                                                                placeholder="Nombre de usuario">
+                                                            <small *ngIf="username?.invalid && username.touched" class="text-mor">El nombre de usuario es requerido</small>     
+                                                            <small *ngIf="usernameDuplicado" class="text-mor">El nombre de usuario ya esta en uso</small>
+                                                        </div>
+            
+                                                        <!--Correo electrónico --->
+                                                        <div class="form-group mb-3">
+                                                            <input formControlName="correo" type="email" class="form-control" id="floatingInput" 
+                                                                placeholder="Correo electrónico">
+                                                            <small *ngIf="correo?.invalid && correo.touched" class="text-mor">El correo electrónico es requerido</small>
+                                                            <small *ngIf="correoDuplicado" class="text-mor">El correo electronico ya esta en uso</small> 
+                                                        </div>
+            
+                                                        <!--Contraseña --->
+                                                        <div class="form-group mb-3">
+                                                            <input formControlName="contrasena" type="password" class="form-control" id="floatingInput"
+                                                            placeholder="Contraseña">
+                                                            <small *ngIf="contrasena?.invalid && contrasena.touched" class="text-mor">La contraseña es requerido</small>
+                                                        </div>
+                                                                    
+                                                        <!-- Repetir Contraseña --->
+                                                        <div class="form-group mb-3">
+                                                            <input formControlName="contrasena_val" type="password" class="form-control" id="floatingInput"
+                                                                placeholder="Repetir contraseña">
+                                                                <small *ngIf="contrasena_val?.invalid && contrasena_val.touched" class="text-mor">La contraseña es requerido</small>
+                                                                
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <select id="rol" class="form-select" formControlName="genero" required>
+                                                                <option value="">Género</option>
+                                                                <option *ngFor="let p of generos" [value]="p" >{{p}}</option>    
+                                                            </select>
+                                                            <small *ngIf ="genero?.invalid && genero.touched" class="text-mor">Debes seleccionar un genero</small>
+                                                        </div>   
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="mb-4 pb-2">
+                                                <!-- No borrar -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Formulario Información Específica-->
+                                    <div class="col-lg-6 bg-indigo">
+                                        <div class="p-5">
+                                            <form [formGroup]="exform1" (ngSubmit)="onSubmit()">
+                                                <h3 class="fw-normal mb-5 text-white">Información Específica</h3>
+                                                <div class="mb-4 pb-2">
+            
+                                                    <!--Altura-->
+                                                    <div class="form-group mb-3">
+                                                        <input formControlName="altura" type="number" step="0.01" min="0" max="2.5" class="form-control" id="floatingInput" placeholder="Altura">
+                                                        <small *ngIf="altura?.invalid && altura.touched" class="text-white">Ingresa tu altura</small>
+                                                    </div>
+
+            
+                                                    <!--Peso-->
+                                                    <div class="form-group mb-3">
+                                                        <input  formControlName="peso" type="number" step="0.01" min="0" max="200" class="form-control" id="floatingInput" placeholder="Peso">
+                                                        <small *ngIf="peso?.invalid && peso.touched" class="text-white">Ingresa tu peso</small> 
+                                                    </div>
+
+
+                                                    <!--Conjunto de inputs-->
+                                                    <div class="mb-4 pb-2">
+                                                        <!--Edad-->
+                                                        <div class="form-g mb-3">
+                                                            <input formControlName="edad" type="number" class="form-control" id="floatingInput"
+                                                                placeholder="Edad">
+                                                            <small *ngIf="edad?.invalid && edad.touched" class="text-white">Ingreda tu edad</small>
+                                                        </div>
+            
+                                                        <!--Padecimientos-->
+                                                        <div class="form-group">
+                                                            <select id="rol" class="form-select" formControlName="padecimientos" required>
+                                                                <option value="">Padecimientos</option>
+                                                              <option *ngFor="let p of padecimientos_val" [value]="p">{{p}}</option>    
+                                                            </select>
+                                                            <small *ngIf="padecimientos?.invalid && padecimientos?.touched" class="text-white">Debes seleccionar un padecimiento</small>
+                                                        </div>     
+                                                        <br>
+            
+                                                        <!--Tipo de dieta-->
+                                                        <div class="form-group">
+                                                            <select id="dieta" class="form-select" formControlName="dieta" required>
+                                                                <option value="">Tipo de dieta</option>
+                                                              <option *ngFor="let p of dieta_val" [value]="p">{{p}}</option>    
+                                                            </select>
+                                                            <small *ngIf="dieta?.invalid && dieta.touched" class="text-white">Debes seleccionar una dieta</small>
+                                                        </div> 
+                                                        
+                                                        
+                                                    </div>
+            
+                                                    <!--Terminos y Condiciones-->
+                                                    <div class="form-check d-flex justify-content-start">
+                                                        <input   formControlName="terminos" class="form-check-input me-3" type="checkbox" value=""
+                                                            id="form2Example3c"  (change)="acceptTerms($event)" />
+                                                        <label class="form-check-label text-white" for="form2Example3">Acepto términos y condiciones.
+                                                        </label>
+                                                    </div>
+                                                    <div *ngIf="!accept && terminos.touched" >
+                                                        <small class="text-white"> Debes aceptar los términos y condiciones</small>
+                                                    </div>
+                                                    
+                                                    <div class="pt-3">
+                                                        <button [disabled]="exform.invalid || loading || exform1.invalid"  class="btn btn-outline-light"><span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Registrarse</button>
+                                                    </div>
+            
+                                                    
+                                                
+                                                    <div class="text-white pt-3"> ¿Ya tienes una cuenta?
+                                                        <a routerLink="/auth/login" class="text-white"><u>Inicia Sesión</u></a>
+                                                    </div>
+                                                </div>    
+                                            </form>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+    </body>
+</html>
