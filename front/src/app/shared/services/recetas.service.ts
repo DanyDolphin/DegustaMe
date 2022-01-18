@@ -23,4 +23,12 @@ export class RecetasService {
   obtenRecomendaciones() {
     return this.http.get(`${API_BASE}/recetas/recomendaciones/`)
   }
+
+  obtenSeguimientoRecetas() {
+    return this.http.get<any>(`${API_BASE}/recetas/seguimiento/`)
+  }
+
+  eliminarSeguimientoReceta(id: string): Observable<any> {
+    return this.http.delete(`${API_BASE}/productos/${id}`)
+  }
 }
