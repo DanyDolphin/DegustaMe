@@ -8,6 +8,12 @@ const routes: Routes = [
     path: '',
     component: ListaRecetasComponent
   },{
+    path: 'recomendaciones',
+    component: ListaRecetasComponent
+  },{
+    path: 'busqueda/:query',
+    component: ListaRecetasComponent
+  },{
     path: ':receta',
     component: DetallesRecetaComponent
   }

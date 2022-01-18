@@ -1,5 +1,10 @@
 <div class="container pt-5">
-  <h1 id="title">Todas las recetas</h1>
+
+  <app-skeleton
+    *ngIf="titulo === ''"
+    skeletonClass="skeleton-h1"
+  ></app-skeleton>
+  <h1 *ngIf="titulo">{{titulo}}</h1>
 
   <!-- filters -->
   <div class="d-inline-flex">

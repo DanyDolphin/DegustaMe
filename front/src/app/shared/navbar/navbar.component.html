@@ -13,13 +13,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-content">
-      <form class="d-flex mb-2 mb-lg-0 flex-grow-1 me-5" onsubmit="onSearchSubmit(event)">
+      <form class="d-flex mb-2 mb-lg-0 flex-grow-1 me-5" (submit)="onSearchSubmit($event)">
         <input
-          id="search"
+          name="search"
           class="form-control me-2"
           type="search"
           placeholder="Buscar receta / alimento"
           aria-label="Search"
+          [(ngModel)]="busqueda"
         />
         <button class="btn btn-success" type="submit">
           <img src="/assets/search.svg" alt="Buscar">

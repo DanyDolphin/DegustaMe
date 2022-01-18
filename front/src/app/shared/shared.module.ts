@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { SkeletonComponent } from './skeleton/skeleton.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent,

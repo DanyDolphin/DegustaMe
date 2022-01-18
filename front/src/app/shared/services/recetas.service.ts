@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { API_BASE } from '../constants';
 
 @Injectable({
@@ -15,8 +16,8 @@ export class RecetasService {
     return this.http.get(`${API_BASE}/recetas/`)
   }
 
-  buscarRecetas(query: string) {
-    return this.http.get(`${API_BASE}/recetas/search/${encodeURIComponent(query)}`)
+  buscarRecetas(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`${API_BASE}/recetas/search/${encodeURIComponent(query)}`)
   }
 
   obtenRecomendaciones() {
