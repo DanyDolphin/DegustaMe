@@ -9,6 +9,23 @@ hr {
     background-color: rgba(0, 0, 0, 0);
 }
 
+.img-preview{
+    object-fit: cover;
+    width: 250px ;
+    height: 200px;
+}
+
+.step-textarea{
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    resize: none;
+    color: rgb(74, 82, 90);
+    width: 100%;
+    overflow:hidden;
+}
+
+
 #img-selector{
     background-color: white;
     transition: 0.3s;
