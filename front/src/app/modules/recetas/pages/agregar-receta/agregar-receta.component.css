@@ -1,7 +1,22 @@
 .background {
     /* fallback for old browsers */
-    background-color: #9266CC;
-    background: linear-gradient(to right, #9266CC, #AA8DD8);
+    background-color: #C6B3E5;
+    /*background: linear-gradient(to right, #C6B3E5, #AA8DD8);*/
+}
+
+hr {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#img-selector{
+    background-color: white;
+    transition: 0.3s;
+}
+
+#img-selector:hover{
+    background-color: #f0e4ff;
+    transition: 0.3s;
 }
 
 .line {
@@ -11,4 +26,24 @@
 
 .bg-white {
     background-color: white;
+}
+
+.text-purple-dark{
+    color: #553788;
+}
+
+.text-purple{
+    color: #844cce;
+}
+
+.text-purple-light{
+    color: #84719e;
+}
+
+.text-crimson-dark{
+    color: #AE2538;
+}
+
+.text-crimson-light{
+    color: #ca394c;
 }

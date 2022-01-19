@@ -13,77 +13,105 @@
 
 
 
-<form id="form-agregar-receta" class="vh-100 background">
+<form id="form-agregar-receta" [formGroup] = "addRecipeForm" class="background">
 
-    <hr class="pb-5">
 
-    <div class="container" >
-        <div class="d-flex flex-column border p-5 bg-light" style="border-radius: 30px;">
+    <div class="container border pt-5 pb-5" >
 
-            <h4 class="text-center w-100"> Crear receta </h4>
+        <div class="card d-flex flex-column bg-light" style="max-width: 750px; border: solid #a47cd8 1px; border-radius: 1rem;">
 
-            <hr class="line">
+          <div class="card-header" style="background-color: #9266CC; border-radius: .85rem .85rem 0 0;">
+              <h4 class="text-center w-100 pt-3 text-white"> Crear receta </h4>
+          </div>
+
+          <div class="card-body">
 
             <!-- Nombre de receta -->
             <div class="form-group" style="max-width: 500px;">
-                <h5 class="text-primary-1"> Nombre de la receta  </h5>
-                <input id="recipe-name" type="text" class="form-control" placeholder="Escribe aquí el nombre" >
+                <h5 class="text-purple-dark"> Nombre de la receta  </h5>
+                <input formControlName="recipe_name" id="recipe-name" type="text" class="form-control" placeholder="Escribe aquí el nombre" >
             </div>
 
 
             <!-- Imagen de la receta -->
             <div class="d-flex flex-column">
-                <h5 class="text-primary-1"> Imagen de la receta  </h5>
+                <h5 class="text-purple-dark"> Imagen de la receta  </h5>
                 <div class="form-group p-1 d-flex">
-                  <label class="d-flex flex-column border bg-white p-3" for="recipe-image" style="text-align: center; border-radius: 8px;">
+                  <label id="img-selector" class="d-flex flex-column border p-3" for="recipe-image" style="text-align: center; border-radius: 8px;">
                     <img src="https://img.icons8.com/fluency/96/000000/add-image.png"/>
-                    <small>  Subir imagen  </small>
+                    <small class="text-purple-light">  Subir imagen  </small>
                   </label>
-                  <input class="form-control" type="file" accept="image/*" id="recipe-image" onchange="load_image(this);"  style="display: none;">
+                  <input formControlName="recipe_img" class="form-control" type="file" accept="image/*" id="recipe-image" onchange="load_image(this);"  style="display: none;">
                 </div>
             </div>
 
+            <hr class="line">
+
             <!-- Ingredientes -->
             <div class="d-flex flex-column ">
-                <h5 class="text-primary-1"> Ingredientes </h5>
+                <h5 class="text-purple-dark"> Ingredientes </h5>
       
                 <div id="ingredients-list" class="d-flex flex-column">
-                 <app-form-ingrediente> </app-form-ingrediente>
+                  <app-form-ingrediente *ngFor="let ing of ingredientes"  > 
+                  </app-form-ingrediente>
                 </div>
       
-                <button id ="ingredient-add" type='button' class="btn text-primary-1 pu-3" style="height: 30px; width: 200px; line-height: 10px;"> 
+                <button id ="ingredient-add" type='button' (click)="agregaIngrediente()" class="btn text-purple pu-3" style="height: 30px; width: 190px; line-height: 10px;"> 
                   <i class="bi bi-plus-circle"></i> Agregar ingrediente
                 </button>
             </div>
 
-            <hr>
+            <hr class="line">
 
             <!-- Pasos -->
             <div class="d-flex flex-column ">
-                <h5 class="text-primary-1"> Pasos de elaboración </h5>
+                <h5 class="text-purple-dark"> Pasos de elaboración </h5>
       
-                <div id="ingredients-list" class="d-flex flex-column"> </div>
+                <div id="ingredients-list" class="d-flex flex-column"> 
+
+                </div>
       
                 <div class="d-flex flex-row">
-                    <button id ="step-add" type='button' class="btn text-primary-1" style="height: 30px; line-height: 10px;"> 
+                    <button id ="step-add" type='button' class="btn text-purple" style="height: 30px; line-height: 10px;"> 
                       <i class="bi bi-plus-circle"></i> Agregar paso
                     </button>
       
-                    <button id ="step-erase" type='button' class="btn text-secondary-2" style="height: 30px; line-height: 10px;"> 
+                    <button id ="step-erase" type='button' class="btn text-crimson-dark" style="height: 30px; line-height: 10px;"> 
                       <i class="bi bi-dash-circle"></i> Quitar paso
                     </button>
                 </div>
             </div>
 
-            <hr>
+            <hr class="line">
 
             <!-- Categorias de la receta -->
             <div class="form-group" style="max-width: 500px;">
-                <h5 class="text-primary-1"> Categorias de la receta  </h5>
+                <h5 class="text-purple-dark"> Categorias de la receta  </h5>
                 <input id="recipe-category" type="text" class="form-control" placeholder="Escribe aquí las categorias" >
-                <small class="pl-1 text-secondary"> Separa cada categoría usando una coma ","</small>
+                <small class="pl-1 text-purple-light"> Separa cada categoría usando una coma ","</small>
             </div>
-            
-        </div>
+
+            <hr class="line">
+
+            <!-- Subir receta -->
+            <div class="d-flex justify-content-between">
+
+                <!-- terminos y condiciones -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label text-purple" for="defaultCheck1">
+                    Acepto los términos y condiciones.
+                  </label>
+                </div>
+
+
+                <button id ="sumit" type='button' class="btn text-white" style="background-color: #9266CC;"> 
+                  Subir receta
+                </button>
+            </div>
+          
+          </div> <!-- fin cuerpo tarjeta-->
+        </div> <!-- fin de tarjeta -->
+
     </div>
 </form>
