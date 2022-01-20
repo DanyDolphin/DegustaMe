@@ -16,35 +16,22 @@ bp = Blueprint('recetas', __name__, url_prefix='/recetas')
 def consultar_lista_recetas():
     session = Session()
     recetas = session.query(Receta).all()
-    r = []
-    for receta in recetas:
-        ingredientes = receta.obten_lista_ingredientes(session)
-        receta = receta.to_dict()
-        receta['ingredientes'] = ingredientes
-        r.append(receta)
+    recetas = [x.to_dict() for x in recetas]
     session.close()
-    return jsonify(r)
+    return jsonify(recetas)
 
 @bp.route('/recomendaciones/', methods=['GET'])
 def consultar_recomendaciones():
     session = Session()
     recetas = session.query(Receta).all()
-    r = []
-    for receta in recetas:
-        ingredientes = receta.obten_lista_ingredientes(session)
-        receta = receta.to_dict()
-        receta['ingredientes'] = ingredientes
-        r.append(receta)
+    recetas = [x.to_dict() for x in recetas]
     session.close()
-    return jsonify(r)
+    return jsonify(recetas)
 
 @bp.route('/<id>', methods=['GET'])
 def consultar_receta(id):
     session = Session()
-    receta = session.query(Receta).get(id)
-    ingredientes = receta.obten_lista_ingredientes(session)
-    receta = receta.to_dict()
-    receta['ingredientes'] = ingredientes
+    receta = session.query(Receta).get(id).to_dict()
     session.close()
     return jsonify(receta)
 
@@ -52,16 +39,9 @@ def consultar_receta(id):
 def buscar_recetas(query):
     session = Session()
     recetas = session.query(Receta).filter(Receta.nombre.like('%{}%'.format(query)))
-    r = []
-    for receta in recetas:
-        ingredientes = receta.obten_lista_ingredientes(session)
-        receta = receta.to_dict()
-        receta['ingredientes'] = ingredientes
-        r.append(receta)
+    recetas = [x.to_dict() for x in recetas]
     session.close()
-    return jsonify(r)
-
-
+    return jsonify(recetas)
 
 @bp.route('/seguimiento', methods=['GET'])
 @login_required
