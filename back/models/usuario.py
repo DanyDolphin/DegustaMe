@@ -13,8 +13,8 @@ class Usuario(Base):
     correo=Column(String)
     contrasena=Column(String)
     edad=Column(Integer)
-    peso=Column(Float )
-    padecimiento=Column(String)
+    peso=Column(Float)
+    padecimientos=Column(String)
     genero=Column(String)
     dieta=Column(String)
     altura=Column(Float)
@@ -25,7 +25,7 @@ class Usuario(Base):
         self.contrasena = contrasena
         self.edad = edad
         self.peso = peso
-        self.padecimiento = padecimiento
+        self.padecimientos = padecimiento
         self.genero = genero
         self.dieta = dieta
         self.altura = altura

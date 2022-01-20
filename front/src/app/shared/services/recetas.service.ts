@@ -29,10 +29,10 @@ export class RecetasService {
   }
 
   obtenSeguimientoRecetas() {
-    return this.http.get<any>(`${API_BASE}/recetas/seguimiento/`)
+    return this.http.get<any>(`${API_BASE}/recetas/seguimiento`)
   }
 
   eliminarSeguimientoReceta(id: string): Observable<any> {
-    return this.http.delete(`${API_BASE}/productos/${id}`)
+    return this.http.delete(`${API_BASE}/recetas/${id}`)
   }
 }
