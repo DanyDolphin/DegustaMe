@@ -23,7 +23,8 @@ export class NavbarComponent implements OnInit {
 
   onSearchSubmit(event: Event) {
     event.preventDefault()
-    this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
+    if (this.busqueda)
+      this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
   }
 
 }
