@@ -86,7 +86,12 @@ def agrega_receta():
   categorias = request.json['categorias']
   ingredientes = request.json['ingredientes']
 
-  receta = Receta(nombre, imagen, pasos, tiempo, categorias)
+  descripcion = ""
+  for paso in pasos:
+    print("AAAA " + str(paso) )
+    descripcion +=  "• " + paso["descripcion"] + "\n"
+
+  receta = Receta(nombre, imagen, descripcion, tiempo, categorias)
 
   try:
     session.add(receta)
@@ -98,9 +103,8 @@ def agrega_receta():
   for _ingrediente in ingredientes:
       nombre = _ingrediente["nombre"]
       cantidad = _ingrediente["cantidad"]
-      medicion = _ingrediente["medicion"]
+      medicion = _ingrediente["medida"]
       ingrediente = session.query(Ingrediente).filter(Ingrediente.nombre==nombre).first()
-      print(ingrediente.nombre)
       receta_ingrediente = RecetaIngrediente(receta, ingrediente, cantidad, medicion)
       try:
         session.add(receta_ingrediente)
@@ -114,7 +118,7 @@ def agrega_receta():
 
 @bp.route('/agrega/ingrediente', methods=['POST'])
 def agrega_ingrediente():
-  session = Session()
+  session    = Session()
   nombre     = request.json['nombre'].strip().lower()
   proteinas  = request.json['proteinas']
   grasas     = request.json['grasas']

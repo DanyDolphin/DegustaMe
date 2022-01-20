@@ -28,8 +28,9 @@
             <!-- Nombre de receta -->
             <div class="form-group" style="max-width: 500px;">
                 <h5 class="text-purple-dark"> Nombre de la receta  </h5>
-                <input [(ngModel)] = "formAgregaReceta.nombre" name="nombre" 
+                <input [(ngModel)] = "formAgregaReceta.nombre" name="nombre" (change)="valida_campo_nombre()"
                        id="recipe-name" type="text" class="form-control" placeholder="Escriba aquí el nombre de la receta" >
+                <small class="text-crimson-light"> {{formErrores.nombre}} </small>
             </div>
 
 
@@ -55,9 +56,6 @@
                   <button id="erase-image" type="button" (click)="eliminaImagen()" class="btn" style="position: absolute; transform: translate(5px,5px); padding: 0;">
                     <i class="bi bi-x-circle p-1 px-2" style=" border-radius: 0 0 5px 0; background-color: rgba(93, 81, 107, 0.644); color: #ffffff;"></i>
                   </button>
-                  
-                  
-                 
                 </div>
 
 
@@ -75,14 +73,14 @@
                   <div class="form-row py-2 pl-3" style="width: fit-content"
                        *ngFor="let ingrediente of formAgregaReceta.ingredientes; let index = index;">
                     <div class="col-auto">
-                        <input [(ngModel)] = "ingrediente.nombre" name="nombre" 
-                              type="text" class="form-control input-underline mr-2" placeholder="Nombre del ingrediente" style="max-width: 200px;">
+                        <input [(ngModel)] = "ingrediente.nombre" name="ingrediente-{{index}}-nombre"
+                              type="text" class="form-control input-underline mr-2" placeholder="Nombre del ingrediente" style="min-width: 200px; max-width: 200px;">
                     </div>
                     <div class="col-auto">
-                        <div class="input-group">
-                            <input  [(ngModel)] = "ingrediente.cantidad" name="cantidad" 
-                                    *ngIf="medicionUsaCantidad(ingrediente.tipo_medicion)" type="number" class="form-control input-underline" placeholder="1" min="0" max="9999" style="max-width: 65px; -webkit-appearance: none; -moz-appearance: textfield;">
-                            <select [(ngModel)] = "ingrediente.tipo_medicion" name="tipo_medicion" 
+                        <div class="input-group" style="min-width: 200px;">
+                            <input  [(ngModel)] = "ingrediente.cantidad" name="ingrediente-{{index}}-cantidad"
+                                    *ngIf="medicionUsaCantidad(ingrediente.medida)" type="number" class="form-control input-underline" placeholder="1" min="0" max="9999" style="max-width: 65px; -webkit-appearance: none; -moz-appearance: textfield;">
+                            <select [(ngModel)] = "ingrediente.medida" name="ingrediente-{{index}}-medida"
                                     class="custom-select input-underline">
                                 <option *ngFor="let tipo of tiposDeMedicion" [value]="tipo" >{{tipo}}</option>  
                             </select>
@@ -98,6 +96,8 @@
                 <button id ="ingredient-add" type='button' (click)="agregaIngrediente()" class="btn text-purple pu-3" style="height: 30px; width: 190px; line-height: 10px;"> 
                   <i class="bi bi-plus-circle"></i> Agregar ingrediente
                 </button>
+
+                <small class="text-crimson-light"> {{formErrores.ingredientes}} </small>
             </div>
 
             <hr class="line">
@@ -112,7 +112,7 @@
                     <div class="d-flex py-2"
                          *ngFor="let paso of formAgregaReceta.pasos; let index = index;">
                       <span class="p-2 px-2 text-purple-dark"> {{index+1}}.-</span>
-                      <textarea class="step-textarea" autogrow placeholder="Escriba aquí el paso"></textarea>
+                      <textarea class="step-textarea" [(ngModel)] = "paso.descripcion" name="paso-{{index}}-descripcion" autogrow placeholder="Escriba aquí el paso"></textarea>
                     </div> <!-- Paso plantilla --> 
 
                 </div>
@@ -127,6 +127,8 @@
                       <i class="bi bi-dash-circle"></i> Eliminar paso
                     </button>
                 </div>
+
+                <small class="text-crimson-light"> {{formErrores.pasos}} </small>
             </div>
 
             <hr class="line">
@@ -137,6 +139,23 @@
                 <input [(ngModel)] = "formAgregaReceta.categorias" name="categorias" 
                        id="recipe-category" type="text" class="form-control" placeholder="Escriba aquí las categorias" >
                 <small class="pl-1 text-purple-light"> Separa cada categoría usando una coma "," (Ej: postre, navideño )</small>
+                <br>
+                <small class="text-crimson-light"> {{formErrores.categorias}} </small>
+              </div>
+
+            <hr class="line">
+
+            <!-- Tiempo de preparación para la receta -->
+            <div class="form-group" style="max-width: 400px;">
+              <h5 class="text-purple-dark"> Tiempo de preparación estimado  </h5>
+              <div class="d-flex"> 
+                <input [(ngModel)] = "formAgregaReceta.tiempo" name="tiempo" (change)="redondea_tiempo()"
+                     id="recipe-time" type="number" class="form-control text-purple-dark" 
+                     style="width: 50px; height: 30px; border: 0; outline: 0; background: transparent; border-radius: 0; border-bottom: 1px solid rgb(175, 154, 180); -webkit-appearance: none; -moz-appearance: textfield;" 
+                     min="0" max="999" placeholder="0" >
+                <span class="pl-2 text-purple-dark" style="line-height: 40px;"> minutos </span>   
+              </div>
+              <small class="text-crimson-light"> {{formErrores.tiempo}} </small>
             </div>
 
             <hr class="line">
@@ -151,10 +170,13 @@
                   <label class="form-check-label text-purple" for="defaultCheck1">
                     Aceptar términos y condiciones.
                   </label>
+                  <br>
+                  <small class="text-crimson-light"> {{formErrores.terminos}} </small>
                 </div>
 
 
-                <button id ="sumit" type='button' class="btn text-white" style="background-color: #9266CC;"> 
+                <button (click)="subirReceta()"
+                        id ="sumit" type='button' class="btn text-white" style="background-color: #9266CC;"> 
                   Subir receta
                 </button>
             </div>
