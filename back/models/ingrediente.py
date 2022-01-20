@@ -9,15 +9,13 @@ class Ingrediente(Base):
     __tablename__ = 'ingrediente'
     ingrediente_id = Column(Integer, primary_key=True)
     nombre = Column(String)
-    medida = Column(String)
     proteinas = Column(Numeric)
     grasas = Column(Numeric)
     calorias = Column(Numeric)
     tipo = Column(String)
 
-    def __init__(self, nombre, medida, proteinas, calorias, grasas, tipo):
+    def __init__(self, nombre, proteinas, calorias, grasas, tipo):
         self.nombre = nombre
-        self.medida = medida
         self.proteinas = proteinas
         self.calorias = calorias
         self.grasas = grasas

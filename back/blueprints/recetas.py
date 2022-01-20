@@ -7,6 +7,7 @@ from flask import Blueprint,jsonify,request,g
 from models.conexion_bd import Session
 from models.receta import Receta
 from models.ingrediente import Ingrediente
+from models.receta_ingrediente import RecetaIngrediente
 from .auth import login_required
 bp = Blueprint('recetas', __name__, url_prefix='/recetas')
 
@@ -87,4 +88,62 @@ def eliminar_seguimiento_receta(id):
   session.commit()
   return jsonify("server: Se ha eliminado el seguimiento de la receta")
 
-    
+
+@bp.route('/agrega', methods=['POST'])
+def agrega_receta():
+  session = Session()
+  nombre = request.json['nombre'].strip().lower()
+  imagen = request.json['imagen']
+  pasos = request.json['pasos']
+  tiempo = request.json['tiempo']
+  categorias = request.json['categorias']
+  ingredientes = request.json['ingredientes']
+
+  descripcion = ""
+  for paso in pasos:
+    print("AAAA " + str(paso) )
+    descripcion +=  "• " + paso["descripcion"] + "\n"
+
+  receta = Receta(nombre, imagen, descripcion, tiempo, categorias)
+
+  try:
+    session.add(receta)
+    session.commit()
+  except:
+    session.rollback()
+    return jsonify(dict(mensaje= "server: Ha ocurrido un error, porfavor intentelo mas tarde")), 500 
+
+  for _ingrediente in ingredientes:
+      nombre = _ingrediente["nombre"]
+      cantidad = _ingrediente["cantidad"]
+      medicion = _ingrediente["medida"]
+      ingrediente = session.query(Ingrediente).filter(Ingrediente.nombre==nombre).first()
+      receta_ingrediente = RecetaIngrediente(receta, ingrediente, cantidad, medicion)
+      try:
+        session.add(receta_ingrediente)
+        session.commit()
+      except:
+        session.rollback()
+
+  return jsonify("server: Receta registrada con éxito.")
+
+
+
+@bp.route('/agrega/ingrediente', methods=['POST'])
+def agrega_ingrediente():
+  session    = Session()
+  nombre     = request.json['nombre'].strip().lower()
+  proteinas  = request.json['proteinas']
+  grasas     = request.json['grasas']
+  calorias   = request.json['calorias']
+  categorias = request.json['categorias'].strip().lower()
+
+  nuevo_ingrediente = Ingrediente(nombre, proteinas, calorias, grasas, categorias)
+  
+  try:
+    session.add(nuevo_ingrediente)
+    session.commit()
+  except:
+    session.rollback()
+    return jsonify(dict(mensaje= "server: Ha ocurrido un error, porfavor intentelo mas tarde")), 500 
+  return jsonify("server: Ingrediente registrado con exito.")

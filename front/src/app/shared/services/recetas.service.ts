@@ -35,4 +35,13 @@ export class RecetasService {
   eliminarSeguimientoReceta(id: string): Observable<any> {
     return this.http.delete(`${API_BASE}/recetas/${id}`)
   }
+
+  agregaReceta( receta: any ): Observable<any> {
+    console.log("Haciendo petición de agregar receta")
+    return this.http.post(`${API_BASE}/recetas/agrega`, receta);
+  }
+
+  eliminarReceta( id: string ): Observable<any> {
+    return this.http.delete(`${API_BASE}/recetas/elimina/${id}`);
+  }
 }
