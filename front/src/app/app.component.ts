@@ -23,7 +23,9 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd
         && (event.url === '/auth/login' || event.url === '/auth/signin'))
-          this.showNavbar = false
+        this.showNavbar = false
+      else
+        this.showNavbar = true
     })
   }
 }
