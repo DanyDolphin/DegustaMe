@@ -37,7 +37,7 @@ def registrarse():
   tipo_dieta=request.json['tipo_dieta']
   usuario = Usuario(nombre_usuario, correo, generate_password_hash(contrasena), edad, peso, padecimiento, genero, tipo_dieta, altura)
   print(usuario)
-  usr=session.query(Usuario).get(nombre_usuario)
+  usr = session.query(Usuario).get(nombre_usuario)
   corr= session.query(Usuario).filter(Usuario.correo==correo).first()
 
   if usr or corr:

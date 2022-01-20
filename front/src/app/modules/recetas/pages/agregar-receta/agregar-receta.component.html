@@ -29,7 +29,7 @@
             <div class="form-group" style="max-width: 500px;">
                 <h5 class="text-purple-dark"> Nombre de la receta  </h5>
                 <input [(ngModel)] = "formAgregaReceta.nombre" name="nombre" 
-                       id="recipe-name" type="text" class="form-control" placeholder="Escribe aquí el nombre" >
+                       id="recipe-name" type="text" class="form-control" placeholder="Escriba aquí el nombre de la receta" >
             </div>
 
 
@@ -112,7 +112,7 @@
                     <div class="d-flex py-2"
                          *ngFor="let paso of formAgregaReceta.pasos; let index = index;">
                       <span class="p-2 px-2 text-purple-dark"> {{index+1}}.-</span>
-                      <textarea class="step-textarea" autogrow placeholder="Escribe aquí el paso"></textarea>
+                      <textarea class="step-textarea" autogrow placeholder="Escriba aquí el paso"></textarea>
                     </div> <!-- Paso plantilla --> 
 
                 </div>
@@ -135,7 +135,7 @@
             <div class="form-group" style="max-width: 500px;">
                 <h5 class="text-purple-dark"> Categorias de la receta  </h5>
                 <input [(ngModel)] = "formAgregaReceta.categorias" name="categorias" 
-                       id="recipe-category" type="text" class="form-control" placeholder="Escribe aquí las categorias" >
+                       id="recipe-category" type="text" class="form-control" placeholder="Escriba aquí las categorias" >
                 <small class="pl-1 text-purple-light"> Separa cada categoría usando una coma "," (Ej: postre, navideño )</small>
             </div>
 

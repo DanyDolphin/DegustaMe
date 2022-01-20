@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormArray, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RecetasService } from 'src/app/shared/services/recetas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-receta',
@@ -8,12 +10,18 @@ import { FormControl, FormArray, FormGroup, Validators, ReactiveFormsModule } fr
 })
 
 export class AgregarRecetaComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private servicioReceta: RecetasService,
+    private router: Router
+  ){}
 
   // Tipos de medición de cantidades para ingredientes.
   tiposDeMedicion=['piezas','gramos','kilos','onzas','manojos','cucharadas','mililitros','al gusto'];
   // Tipos de medición de cantidades que no requiere una cantidad numérica.
   tiposDeMedicionSinCantidad=['al gusto'];
+
+  // Variable que nos dice si los datos ingresados al formulario son inválidos.
+  isFormInvalid = false;
 
   // Valores formulario del componente.
   formAgregaReceta = {
@@ -74,6 +82,26 @@ export class AgregarRecetaComponent implements OnInit {
   eliminaImagen() {
     this.formAgregaReceta.imagen = "";
  }
+
+
+ onSubmit() {
+
+  if (this.isFormInvalid ) {
+    return;
+  }
+  this.servicioReceta.agregaReceta(this.formAgregaReceta)
+    .subscribe(
+        data => {
+          Swal.fire({
+            title: 'Exito',
+            html: `<h3>Registro<b>Exitoso</b></h3><br>`,
+            icon: 'success'
+          }) 
+          this.router.navigate(['/auth/login']);
+        }
+      );
+
+  }
 
 
 }

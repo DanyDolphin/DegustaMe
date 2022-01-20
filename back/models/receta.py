@@ -1,5 +1,5 @@
 # SQLAlchemy
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Text
 from sqlalchemy.orm import relationship
 
 # models
@@ -12,14 +12,15 @@ class Receta(Base):
     __tablename__ = 'receta'
     receta_id = Column(Integer, primary_key=True)
     nombre = Column(String)
+    imagen = Column(Text)
     descripcion = Column(String)
     tiempo = Column(Integer)
     tipo = Column(String)
+    ingredientes = relationship(RecetaIngrediente, cascade="all, delete-orphan", backref="receta")
 
-    ingredientes = relationship(RecetaIngrediente, backref="receta")
-
-    def __init__(self, nombre, descripcion, tiempo, tipo):
+    def __init__(self, nombre, imagen, descripcion, tiempo, tipo):
         self.nombre = nombre
+        self.imagen = imagen
         self.descripcion = descripcion
         self.tiempo = tiempo
         self.tipo = tipo
@@ -31,6 +32,7 @@ class Receta(Base):
         return dict(
             receta_id=self.receta_id,
             nombre=self.nombre,
+            imagen=self.imagen,
             descripcion=self.descripcion,
             tiempo=self.tiempo,
             tipo=self.tipo

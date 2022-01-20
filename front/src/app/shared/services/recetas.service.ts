@@ -31,4 +31,8 @@ export class RecetasService {
   eliminarSeguimientoReceta(id: string): Observable<any> {
     return this.http.delete(`${API_BASE}/productos/${id}`)
   }
+
+  agregaReceta( receta: any){
+    return this.http.delete(`${API_BASE}/productos/${receta}`)
+  }
 }
