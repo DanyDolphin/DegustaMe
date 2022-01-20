@@ -1,0 +1,23 @@
+<!-- Ingredient -->
+<div class="form-row py-2 pl-3" style="width: fit-content">
+
+    <div class="col-auto">
+        <input [(ngModel)] = "ingredient.name" type="text" class="form-control input-underline mr-2" placeholder="Nombre del ingrediente" style="max-width: 200px;">
+    </div>
+
+    <div class="col-auto">
+        <div class="input-group">
+
+            <input [(ngModel)] = "ingredient.amount" *ngIf="measurement_uses_amount(ingredient.measurement_type)" type="number" class="form-control input-underline" placeholder="1" min="0" max="9999" style="max-width: 65px; -webkit-appearance: none; -moz-appearance: textfield;">
+            <select [(ngModel)] = "ingredient.measurement_type" class="custom-select input-underline">
+                <option *ngFor="let type of measurements_types" [value]="type" >{{type}}</option>  
+            </select>
+
+        </div>
+    </div>
+
+    <div class="col-auto">
+        <button id="erase-ingredient" onclick="erase_ingredient()" type="button" class="btn"  > <i class="bi bi-x-circle" style="color: #AE2538;"></i>  </button>
+    </div>
+
+</div>

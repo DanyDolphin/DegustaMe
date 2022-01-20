@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-//import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -20,11 +21,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
     ReactiveFormsModule
   ],
   providers: [
-  /*  { 
+   { 
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptor, 
       multi: true 
-    }*/
+    }
   ],
   bootstrap: [AppComponent]
 })

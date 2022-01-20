@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   creaUsuario(){
     return {
       "usuario":this.usuario.value,
-      "contrasena":!this.contrasena.value,       
+      "contrasena":this.contrasena.value,       
      }
   }
 
@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
         this.loading = false
         localStorage.setItem("token", respuesta.token)
         this.servicioAuth.isAuthenticated.next(true)
-        // this.router.navigate(['/home'])
+        console.log('entreeee')
+        this.router.navigate(['/'])
       },
       error => {
         this.loading = false
