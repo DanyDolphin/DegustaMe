@@ -16,6 +16,10 @@ export class RecetasService {
     return this.http.get(`${API_BASE}/recetas/`)
   }
 
+  obtenReceta(id: string) {
+    return this.http.get(`${API_BASE}/recetas/${id}`)
+  }
+
   buscarRecetas(query: string): Observable<any[]> {
     return this.http.get<any[]>(`${API_BASE}/recetas/search/${encodeURIComponent(query)}`)
   }
@@ -25,11 +29,11 @@ export class RecetasService {
   }
 
   obtenSeguimientoRecetas() {
-    return this.http.get<any>(`${API_BASE}/recetas/seguimiento/`)
+    return this.http.get<any>(`${API_BASE}/recetas/seguimiento`)
   }
 
   eliminarSeguimientoReceta(id: string): Observable<any> {
-    return this.http.delete(`${API_BASE}/productos/${id}`)
+    return this.http.delete(`${API_BASE}/recetas/${id}`)
   }
 
   agregaReceta( receta: any ): Observable<any> {

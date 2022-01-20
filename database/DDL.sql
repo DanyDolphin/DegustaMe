@@ -72,3 +72,16 @@ create table usuario_ingrediente (
                                      constraint fk_usuario_ingrediente_ingrediente foreign key (ingrediente_id) references ingrediente(ingrediente_id) on delete cascade
 )ENGINE=InnoDB;
 
+-- Vistas
+
+drop view if exists vw_receta;
+create view vw_receta as
+select 
+    receta.*, 
+    sum(ingrediente.calorias * receta_ingrediente.cantidad) as calorias, 
+    sum(ingrediente.grasas * receta_ingrediente.cantidad) as grasas, 
+    sum(ingrediente.proteinas * receta_ingrediente.cantidad) as proteinas
+from receta 
+    inner join receta_ingrediente on receta.receta_id = receta_ingrediente.receta_id 
+    inner join ingrediente on receta_ingrediente.ingrediente_id = ingrediente.ingrediente_id 
+group by receta.receta_id;

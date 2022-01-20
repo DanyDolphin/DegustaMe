@@ -1,5 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="showNavbar"></app-navbar>
 <div class="master-container">
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="showNavbar"></app-footer>

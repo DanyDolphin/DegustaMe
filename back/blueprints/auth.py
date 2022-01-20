@@ -23,7 +23,7 @@ from wtforms.validators import InputRequired, Length, ValidationError, Email
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/registro', methods=['POST'])
+@bp.route('/signin', methods=['POST'])
 def registrarse():
   session = Session()
   nombre_usuario = request.json['usuario']
@@ -61,7 +61,6 @@ def iniciar_sesion():
   session = Session()
 
   user = session.query(Usuario).filter(Usuario.nombre_usuario == request.json['usuario']).first()
-
   if user and check_password_hash(user.contrasena, request.json['contrasena']):
     token = jwt.encode({'sub': user.nombre_usuario}, current_app.config['SECRET_KEY'])
     print("Excelente")

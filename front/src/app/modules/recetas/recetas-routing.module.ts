@@ -18,7 +18,13 @@ const routes: Routes = [
     path: 'seguimiento', 
     component: SeguimientoRecetasComponent
   },{
-    path: ':receta',
+    path: 'recomendaciones',
+    component: ListaRecetasComponent
+  },{
+    path: 'busqueda/:query',
+    component: ListaRecetasComponent
+  },{
+    path: ':id',
     component: DetallesRecetaComponent
   },
 ];
