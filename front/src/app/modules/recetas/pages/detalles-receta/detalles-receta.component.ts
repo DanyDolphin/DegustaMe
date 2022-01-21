@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RecetasService } from 'src/app/shared/services/recetas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalles-receta',
@@ -28,7 +29,10 @@ export class DetallesRecetaComponent implements OnInit {
           console.log(receta)
         })
     })
-    
+  }
+
+  agregaFavorito(){
+    console.log(this.receta)
   }
 
 }

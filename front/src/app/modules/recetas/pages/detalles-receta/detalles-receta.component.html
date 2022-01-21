@@ -7,7 +7,11 @@
           <app-skeleton *ngIf="!receta" skeletonClass="skeleton-h1"></app-skeleton>
           {{receta?.nombre}}
         </h1>
-        <img src="/assets/heart.svg" alt="Añadir a favoritos"/>
+
+        <button id="agrega-fav" (click)="agregaFavorito()" type="button" class="btn" style="height: 40px;">
+          <img src="/assets/heart.svg" alt="Añadir a favoritos"/>
+        </button>
+        
       </div>
       <span *ngIf="receta" class="badge bg-secondary me-2">{{receta?.tipo}}</span>
       <span *ngIf="receta" class="badge bg-secondary">{{receta?.tiempo + ' min'}}</span>

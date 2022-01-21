@@ -1,17 +1,11 @@
 # SQLAlchemy
-
-from sqlalchemy import Column, String, Integer, Text, Numeric, Table, ForeignKey
+from sqlalchemy import Column, String, Integer, Text
 from sqlalchemy.orm import relationship
 
 # models
 from models.conexion_bd import Base
+from models.receta_ingrediente import RecetaIngrediente
 from models.ingrediente import Ingrediente
-
-receta_ingrediente = Table('receta_ingrediente', Base.metadata,
-    Column('receta_id', ForeignKey('vw_receta.receta_id'), primary_key=True),
-    Column('ingrediente_id', ForeignKey('ingrediente.ingrediente_id'), primary_key=True),
-    extend_existing=True
-)
 
 class Receta(Base):
 
@@ -25,12 +19,6 @@ class Receta(Base):
     ingredientes = relationship(RecetaIngrediente, cascade="all, delete-orphan", backref="receta")
 
     def __init__(self, nombre, imagen, descripcion, tiempo, tipo):
-    grasas = Column(Numeric)
-    calorias = Column(Numeric)
-    proteinas = Column(Numeric)
-
-
-    def __init__(self, nombre, descripcion, tiempo, tipo):
         self.nombre = nombre
         self.imagen = imagen
         self.descripcion = descripcion
@@ -47,10 +35,7 @@ class Receta(Base):
             imagen=self.imagen,
             descripcion=self.descripcion,
             tiempo=self.tiempo,
-            tipo=self.tipo,
-            grasas=self.grasas,
-            calorias=self.calorias,
-            proteinas=self.proteinas
+            tipo=self.tipo
         )
     
     def obten_lista_ingredientes(self, session):
