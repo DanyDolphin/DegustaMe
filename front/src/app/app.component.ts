@@ -21,9 +21,11 @@ export class AppComponent {
     this.servicioAuth.isAuthenticated.next(token !== null)
 
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd
-        && (event.url === '/auth/login' || event.url === '/auth/signin'))
+      if (event instanceof NavigationEnd)
+        if (event.url === '/auth/login' || event.url === '/auth/signin')
           this.showNavbar = false
+        else
+          this.showNavbar = true
     })
   }
 }

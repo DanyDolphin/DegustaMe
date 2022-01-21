@@ -9,9 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: ListaRecetasComponent
-
-  },
-  {
+  },{
     path: 'agregar',
     component: AgregarRecetaComponent
   },{

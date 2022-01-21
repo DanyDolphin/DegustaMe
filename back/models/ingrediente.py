@@ -28,7 +28,6 @@ class Ingrediente(Base):
         return dict(
             ingrediente_id=self.ingrediente_id,
             nombre=self.nombre,
-            medida=self.medida,
             proteinas=self.proteinas,
             calorias=self.calorias,
             grasas=self.grasas,

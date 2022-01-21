@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-purple-dark2">
   <div class="container-fluid">
     <a class="navbar-brand me-4" routerLink="/">DegustaMe</a>
     <button
@@ -22,7 +22,7 @@
           aria-label="Search"
           [(ngModel)]="busqueda"
         />
-        <button class="btn btn-success" type="submit">
+        <button class="btn btn-purple" type="submit">
           <img src="/assets/search.svg" alt="Buscar">
         </button>
       </form>
@@ -34,13 +34,14 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menú
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/perfil">Mi perfil</a></li>
-            <li><a class="dropdown-item" routerLink="/crear-receta">Crear receta</a></li>
+            <li><a class="dropdown-item" routerLink="/agregar">Crear receta</a></li>
             <li><a class="dropdown-item" routerLink="/recomendaciones">Recomendaciones</a></li>
             <li><a class="dropdown-item" routerLink="/seguimiento">Seguimiento</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li class="text-danger">Cerrar sesión</li>
+            <li class="dropdown-item text-danger cursor-pointer"
+              (click)="cerrarSesion()">Cerrar sesión</li>
           </ul>
         </li>
       </ul>
