@@ -72,6 +72,8 @@ def iniciar_sesion():
     )), 401
 
 
+
+
 @bp.route('/logout', methods=['POST'])
 def cerrar_sesion():
   pass
@@ -119,3 +121,10 @@ def login_required(controlador):
     return controlador(**kwargs)
   return nuevo_controlador
   
+@bp.route('/perfil', methods=['GET'])
+@login_required
+def obtener_usuario():
+  session = Session()
+  username=g.user['username']
+  usuario=session.query(Usuario).get(username)
+  return jsonify({'username': usuario.nombre_usuario,'padecimientos':usuario.padecimientos,'genero':usuario.genero,'altura':usuario.altura,'peso':usuario.peso,'edad':usuario.edad,'dieta':usuario.dieta})
