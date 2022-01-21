@@ -18,12 +18,16 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token')
+    this.isLoggedIn = !!token
+
     this.authService.isAuthenticated.subscribe(v => this.isLoggedIn = v)
   }
 
   onSearchSubmit(event: Event) {
     event.preventDefault()
-    this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
+    if (this.busqueda)
+      this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
   }
 
 }

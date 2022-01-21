@@ -12,13 +12,15 @@ export class DetallesRecetaComponent implements OnInit {
 
   receta: any
 
+  favorito = false;
+
   constructor(
     private recetasService: RecetasService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   get descripcion(): string {
-    return this.receta?.descripcion?.replace(/\n/g, '<br/>')
+    return this.receta?.descripcion?.replace(/•/g, '<br/>')
   }
 
   ngOnInit(): void {
@@ -31,8 +33,51 @@ export class DetallesRecetaComponent implements OnInit {
     })
   }
 
+  actualizaFavorito(){
+    this.recetasService.verificaSeguimientoReceta(this.receta.receta_id).subscribe(
+      respuesta => {
+        this.favorito = respuesta.valor;
+        });
+    if(this.favorito)
+      this.eliminaFavorito()
+    else
+      this.agregaFavorito()
+  }
+
   agregaFavorito(){
-    console.log(this.receta)
+    console.log("Haciendo peticion para agregar a seguimiento <" + this.receta.receta_id + ">")
+    this.recetasService.agregarSeguimientoReceta(this.receta.receta_id).subscribe(
+      respuesta => {
+        this.favorito = true;
+          Swal.fire({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            title: 'Exito',
+            html: `<h3>La receta se ha agregado a tu lista de seguimiento</h3><br>`,
+            icon: 'success'
+          }) 
+        },
+      error => {
+          console.error(error)
+          Swal.fire('Error del servidor', 'Favor de intentarlo de nuevo', 'error')
+        }
+  );
+  }
+
+  eliminaFavorito(){
+    console.log("Haciendo peticion para eliminar de seguimiento <" + this.receta.receta_id + ">")
+    this.recetasService.eliminarSeguimientoReceta(this.receta.receta_id).subscribe(
+      respuesta => {
+          this.favorito = false;
+          Swal.fire({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            title: 'Exito',
+            html: `<h3>La receta se ha eliminado de tu lista de seguimiento</h3><br>`,
+            icon: 'success'
+          }) 
+        },
+      error => {
+          console.error(error)
+          Swal.fire('Error del servidor', 'Favor de intentarlo de nuevo', 'error')
+        }
+  );
   }
 
 }

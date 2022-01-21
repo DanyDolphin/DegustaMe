@@ -1,11 +1,13 @@
 # SQLAlchemy
-from sqlalchemy import Column, String, Integer, Text
+from sqlalchemy import Column, String, Integer, Numeric, Text
 from sqlalchemy.orm import relationship
+from models.receta_ingrediente import RecetaIngrediente
 
 # models
 from models.conexion_bd import Base
 from models.receta_ingrediente import RecetaIngrediente
 from models.ingrediente import Ingrediente
+
 
 class Receta(Base):
 
@@ -29,6 +31,13 @@ class Receta(Base):
         '''
         Regresa una representación del modelo en un diccionario
         '''
+        ingredientes = []
+        for ingrediente in self.ingredientes:
+            d = ingrediente.ingrediente.to_dict()
+            d['medida'] = ingrediente.medida
+            d['cantidad'] = ingrediente.cantidad
+            ingredientes.append(d)
+
         return dict(
             receta_id=self.receta_id,
             nombre=self.nombre,
@@ -37,11 +46,4 @@ class Receta(Base):
             tiempo=self.tiempo,
             tipo=self.tipo
         )
-    
-    def obten_lista_ingredientes(self, session):
-        lista = []
-        if self.ingredientes is not None:
-            for ingrediente in self.ingredientes:
-                modelo = session.query(Ingrediente).get(ingrediente.ingrediente_id)
-                lista.append(modelo.to_dict())
-        return lista
+

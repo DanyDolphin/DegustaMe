@@ -1,11 +1,24 @@
 .skeleton {
-  background-color: #dfdfc7;
+  background-color: #553788;
   animation: blink 1.5s ease infinite;
   will-change: opacity;
   height: 24px;
   display: block;
   width: 100%;
   min-width: 300px;
+  border-radius: 0.25rem;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .skeleton-h1 {

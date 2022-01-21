@@ -1,60 +1,64 @@
-<div class="container py-5">
+<div class="bg-purple-light1 min-vh-100">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="d-flex">
+          <h1 class="me-5">
+            <app-skeleton *ngIf="!receta" skeletonClass="skeleton-h1"></app-skeleton>
+            {{receta?.nombre}}
+          </h1>
 
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="d-flex">
-        <h1 class="me-5">
-          <app-skeleton *ngIf="!receta" skeletonClass="skeleton-h1"></app-skeleton>
-          {{receta?.nombre}}
-        </h1>
+          <button id="agrega-fav" (click)="actualizaFavorito()" type="button" class="btn" style="height: 40px;">
+            <img src="/assets/heart.svg" *ngIf="!favorito" alt="Añadir a favoritos"/>
+            <img src="/assets/heart-fill.svg" *ngIf="favorito" alt="Añadir a favoritos"/>
+          </button>
 
-        <button id="agrega-fav" (click)="agregaFavorito()" type="button" class="btn" style="height: 40px;">
-          <img src="/assets/heart.svg" alt="Añadir a favoritos"/>
-        </button>
-        
+          
+
+        </div>
+        <span *ngIf="receta" class="badge bg-secondary me-2">{{receta?.tipo}}</span>
+        <span *ngIf="receta" class="badge bg-secondary">{{receta?.tiempo + ' min'}}</span>
+  
+        <h2 class="mt-4">Ingredientes</h2>
+        <ul>
+          <li *ngIf="!receta">
+            <app-skeleton skeletonClass="skeleton-text"></app-skeleton>
+          </li>
+          <li *ngFor="let ingrediente of receta?.ingredientes || []">
+            {{ingrediente.nombre}} - {{ingrediente.cantidad}}  {{ingrediente.medida}}
+          </li>
+        </ul>
+  
+        <h2 class="mt-4">Preparación</h2>
+        <app-skeleton *ngIf="!receta" skeletonClass="skeleton-text"></app-skeleton>
+        <div [innerHtml]="descripcion"></div>
       </div>
-      <span *ngIf="receta" class="badge bg-secondary me-2">{{receta?.tipo}}</span>
-      <span *ngIf="receta" class="badge bg-secondary">{{receta?.tiempo + ' min'}}</span>
-
-      <h2 class="mt-4">Ingredientes</h2>
-      <ul>
-        <li *ngIf="!receta">
-          <app-skeleton skeletonClass="skeleton-text"></app-skeleton>
-        </li>
-        <li *ngFor="let ingrediente of receta?.ingredientes || []">
-          {{ingrediente.nombre}} - {{ingrediente.cantidad}}  {{ingrediente.medida}}
-        </li>
-      </ul>
-
-      <h2 class="mt-4">Preparación</h2>
-      <app-skeleton *ngIf="!receta" skeletonClass="skeleton-text"></app-skeleton>
-      <div [innerHtml]="descripcion"></div>
-    </div>
-
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Valor nutricional</h2>
-          <ul>
-            <li>
-              Calorías: <div class="d-inline-block">
-                <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
-                {{receta?.calorias + ' kcal'}}
-              </div>
-            </li>
-            <li>
-              Grasas: <div class="d-inline-block">
-                <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
-                {{receta?.grasas + ' g'}}
-              </div>
-            </li>
-            <li>
-              Proteínas: <div class="d-inline-block">
-                <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
-                {{receta?.proteinas + ' g'}}
-              </div>
-            </li>
-          </ul>
+  
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Valor nutricional</h2>
+            <ul>
+              <li>
+                Calorías: <div class="d-inline-block">
+                  <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
+                  {{receta?.calorias + ' kcal'}}
+                </div>
+              </li>
+              <li>
+                Grasas: <div class="d-inline-block">
+                  <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
+                  {{receta?.grasas + ' g'}}
+                </div>
+              </li>
+              <li>
+                Proteínas: <div class="d-inline-block">
+                  <app-skeleton *ngIf="!receta" skeletonClass="skeleton-valor"></app-skeleton>
+                  {{receta?.proteinas + ' g'}}
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

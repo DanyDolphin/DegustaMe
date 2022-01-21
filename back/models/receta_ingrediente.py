@@ -1,5 +1,6 @@
-# SQLAlchemy
-from sqlalchemy import Column, Integer, Float, String, ForeignKey
+
+from sqlalchemy import Column, Integer, Float, ForeignKey, String
+from sqlalchemy.orm import relationship
 
 # models
 from models.conexion_bd import Base
@@ -11,6 +12,7 @@ class RecetaIngrediente(Base):
     ingrediente_id = Column(Integer, ForeignKey('ingrediente.ingrediente_id'), primary_key=True)
     cantidad = Column(Float)
     medida = Column(String)
+    ingrediente = relationship("Ingrediente", backref="receta_ingrediente")
 
     def __init__(self, receta, ingrediente, cantidad, medida):
         self.cantidad = cantidad

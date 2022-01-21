@@ -28,12 +28,20 @@ export class RecetasService {
     return this.http.get(`${API_BASE}/recetas/recomendaciones/`)
   }
 
+  obtenCategorias(): Observable<string[]> {
+    return this.http.get<string[]>(`${API_BASE}/recetas/categorias`)
+  }
+
   obtenSeguimientoRecetas() {
     return this.http.get<any>(`${API_BASE}/recetas/seguimiento`)
   }
 
   agregarSeguimientoReceta(id: string): Observable<any> {
-    return this.http.post(`${API_BASE}/recetas/segumiento/agrega/${id}`,{})
+    return this.http.post(`${API_BASE}/recetas/seguimiento/agrega/${id}`,{})
+  }
+
+  verificaSeguimientoReceta(id: string): Observable<any> {
+    return this.http.get(`${API_BASE}/recetas/seguimiento/verifica/${id}`,{})
   }
 
   eliminarSeguimientoReceta(id: string): Observable<any> {
