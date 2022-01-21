@@ -29,7 +29,10 @@ create table receta (
     descripcion text not null,
     tiempo int(3) not null,
     tipo varchar(100) not null,
-    imagen text not null
+    imagen text not null,
+    nombre_usuario varchar(100) null default null,
+
+    constraint fk_usuario foreign key(nombre_usuario) references usuario(nombre_usuario)
 
 )ENGINE=InnoDB;
 

@@ -40,7 +40,8 @@
             <li><a class="dropdown-item" routerLink="/recomendaciones">Recomendaciones</a></li>
             <li><a class="dropdown-item" routerLink="/seguimiento">Seguimiento</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li class="dropdown-item text-danger">Cerrar sesión</li>
+            <li class="dropdown-item text-danger cursor-pointer"
+              (click)="cerrarSesion()">Cerrar sesión</li>
           </ul>
         </li>
       </ul>
