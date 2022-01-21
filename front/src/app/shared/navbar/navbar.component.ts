@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -28,6 +29,23 @@ export class NavbarComponent implements OnInit {
     event.preventDefault()
     if (this.busqueda)
       this.router.navigate([`/busqueda/${encodeURIComponent(this.busqueda)}`])
+  }
+
+  cerrarSesion() {
+    Swal.fire({
+      title: 'Cerrar sesión',
+      text: 'Quieres cerar sesión?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar'
+    }).then(v => {
+      if (v.isConfirmed) {
+        localStorage.clear()
+        this.authService.isAuthenticated.next(false)
+        this.router.navigate(['/'])
+      }
+    })
   }
 
 }

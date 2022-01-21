@@ -32,10 +32,16 @@ class Receta(Base):
         Regresa una representación del modelo en un diccionario
         '''
         ingredientes = []
+        grasas = 0
+        calorias = 0
+        proteinas = 0
         for ingrediente in self.ingredientes:
             d = ingrediente.ingrediente.to_dict()
             d['medida'] = ingrediente.medida
             d['cantidad'] = ingrediente.cantidad
+            grasas = grasas + (d['grasas'] * d['cantidad'])
+            calorias = calorias + (d['calorias'] * d['cantidad'])
+            proteinas = proteinas + (d['proteinas'] * d['cantidad'])
             ingredientes.append(d)
 
         return dict(
@@ -44,6 +50,9 @@ class Receta(Base):
             imagen=self.imagen,
             descripcion=self.descripcion,
             tiempo=self.tiempo,
-            tipo=self.tipo
+            tipo=self.tipo,
+            grasas=grasas,
+            calorias=calorias,
+            proteinas=proteinas,
+            ingredientes=ingredientes
         )
-

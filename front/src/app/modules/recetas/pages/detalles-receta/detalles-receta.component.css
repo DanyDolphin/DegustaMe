@@ -2,3 +2,8 @@
   height: 56px;
   width: 56px;
 }
+.receta-img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}

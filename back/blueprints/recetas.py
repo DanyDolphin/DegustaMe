@@ -1,5 +1,4 @@
 # flask
-from itsdangerous import json
 from models.usuario_receta import UsuarioReceta
 from models.usuario_ingrediente import UsuarioIngrediente
 from flask import Blueprint,jsonify,request,g
@@ -59,13 +58,10 @@ def obten_categorias():
 @login_required
 def seguimiento_recetas():
     session = Session()
-    #seguimiento_ingredientes= session.query(UsuarioIngrediente).filter(UsuarioIngrediente.nombre_usuario==g.usuario.nombre_usuario)
-    seguimiento_recetas= session.query(UsuarioReceta).filter(UsuarioReceta.nombre_usuario==g.usuario.nombre_usuario).all()
-    ingredientes = []
+    print("ENTREEEEE")
+    print(g.user)
+    seguimiento_recetas= session.query(UsuarioReceta).filter(UsuarioReceta.nombre_usuario==g.user['username']).all()
     recetas = []
-    #for ing in seguimiento_ingredientes:
-    #    ingrediente=session.query(Ingrediente).get(ing.ingrediente_id)
-    #    ingredientes.append(ingrediente.to_dict())
     for rec in seguimiento_recetas:
         receta=session.query(Receta).get(rec.receta_id)
         recetas.append(receta.to_dict())
