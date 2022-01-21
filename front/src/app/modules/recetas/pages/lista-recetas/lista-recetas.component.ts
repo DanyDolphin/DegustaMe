@@ -10,7 +10,8 @@ import { RecetasService } from 'src/app/shared/services/recetas.service';
 export class ListaRecetasComponent implements OnInit {
 
   recetas: any = null
-
+  categorias: string[] = []
+  filtro = ''
   titulo = ''
 
   constructor(
@@ -19,10 +20,17 @@ export class ListaRecetasComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
-    this.cargarRecetas()
+  get recetasFiltradas() {
+    if (!this.recetas) return []
+    return this.recetas.filter((receta: any)=> receta.tipo.includes(this.filtro))
   }
 
+  ngOnInit(): void {
+    this.cargarRecetas()
+    
+    this.recetasService.obtenCategorias()
+      .subscribe((categorias: string[]) => this.categorias = categorias)
+  }
 
   cargarRecetas() {
     console.log(this.router.url)

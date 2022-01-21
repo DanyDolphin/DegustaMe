@@ -1,8 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* backgrounds */
 .bg-lightgrey {
   background-color: #dfdfc7;
 }
+.bg-purple-dark2 {
+  background-color: #553788;
+}
+.bg-purple-dark1 {
+  background-color: #9266CC;
+}
+.bg-purple {
+  background-color: #AA88D8
+}
+.bg-purple-light1 {
+  background-color: #E8E1F5
+}
 
+/* buttons */
+.btn-purple {
+  color: #fff!important;
+  background-color: #9266cc!important;
+  border-color: #9266cc!important;
+}
+.btn-purple:hover {
+  color: #fff!important;
+  background-color: #7c57ad!important;
+  border-color: #714f9e!important;
+}
+.btn-purple:focus {
+  color: #fff!important;
+  background-color: #7c57ad!important;
+  border-color: #714f9e!important;
+  box-shadow: 0 0 0 0.25rem rgba(127, 49, 253, 0.5)!important;
+}
+.btn-purple.active,
+.btn-purple:active {
+  color: #fff!important;
+  background-color: #714f9e!important;
+  border-color: #714f9e!important;
+}
+.btn-purple.active:focus,
+.btn-purple:active:focus {
+  box-shadow: 0 0 0 0.25rem rgba(127, 49, 253, 0.5)!important;
+}
+
+/* utilities */
 .cursor-pointer {
   cursor: pointer;
 }

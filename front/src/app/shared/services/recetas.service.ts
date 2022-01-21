@@ -28,6 +28,10 @@ export class RecetasService {
     return this.http.get(`${API_BASE}/recetas/recomendaciones/`)
   }
 
+  obtenCategorias(): Observable<string[]> {
+    return this.http.get<string[]>(`${API_BASE}/recetas/categorias`)
+  }
+
   obtenSeguimientoRecetas() {
     return this.http.get<any>(`${API_BASE}/recetas/seguimiento`)
   }

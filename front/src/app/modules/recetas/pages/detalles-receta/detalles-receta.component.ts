@@ -17,7 +17,7 @@ export class DetallesRecetaComponent implements OnInit {
   ) { }
 
   get descripcion(): string {
-    return this.receta?.descripcion?.replace(/\n/g, '<br/>')
+    return this.receta?.descripcion?.replace(/•/g, '<br/>')
   }
 
   ngOnInit(): void {

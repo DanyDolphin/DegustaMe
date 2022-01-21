@@ -1,4 +1,5 @@
 # flask
+from itsdangerous import json
 from models.usuario_receta import UsuarioReceta
 from models.usuario_ingrediente import UsuarioIngrediente
 from flask import Blueprint,jsonify,request,g
@@ -42,6 +43,16 @@ def buscar_recetas(query):
     recetas = [x.to_dict() for x in recetas]
     session.close()
     return jsonify(recetas)
+
+@bp.route('/categorias', methods=['GET'])
+def obten_categorias():
+    session = Session()
+    recetas = session.query(Receta).all()
+    categorias = [categoria for receta in recetas for categoria in receta.tipo.split(', ')]
+    sin_duplicados = []
+    [sin_duplicados.append(x) for x in categorias if x not in sin_duplicados]
+    session.close()
+    return jsonify(sin_duplicados)
 
 @bp.route('/seguimiento', methods=['GET'])
 @login_required
