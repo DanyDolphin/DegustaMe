@@ -48,4 +48,37 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  getPerfil() {
+    console.log('getPerfil')
+    this.authService.obtenPerfil().subscribe(
+      respuesta => {
+      console.log(respuesta)
+      Swal.fire({
+        title: `<b>Mi Perfil</b>`,
+        html: `<h3>Hola, ${respuesta.username } </h3><br>
+              <h2>Esta es tu información:</h2>
+              <br>
+                <p>Edad: ${respuesta.edad} </p>
+                <p>Peso: ${respuesta.peso}</p>
+                <p>Estatura: ${respuesta.altura}</p>
+                <p>Tipo de dieta: ${respuesta.dieta}</p>
+              `,
+        icon: 'info',
+        iconColor: '#FFFFF',
+        confirmButtonColor: '#AA8DD8'
+      }) 
+    },
+    error => {
+      console.error(error)
+      Swal.fire({
+        title: '<b>OoPs...</b>',
+        html: '<h3>Algo salio mal <br>Por favor intentalo mas tarde </h3><br>',
+        icon: 'error',
+        iconColor: '#EC5569',
+        confirmButtonColor: '#AA8DD8'
+      }) 
+    }
+  )
+  }
+
 }

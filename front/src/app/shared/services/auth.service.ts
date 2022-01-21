@@ -31,4 +31,7 @@ export class AuthService {
     return this.http.post('', {})
   }
   */
+  obtenPerfil(): Observable<any> {
+    return this.http.get(`${API_BASE}/auth/perfil`)
+  }
 }
