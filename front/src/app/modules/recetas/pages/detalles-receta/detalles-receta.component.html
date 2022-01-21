@@ -12,9 +12,11 @@
             {{receta?.nombre}}
           </h1>
 
-          <button id="agrega-fav" (click)="actualizaFavorito()" type="button" class="btn" style="height: 40px;">
-            <img src="/assets/heart.svg" *ngIf="!favorito" alt="Añadir a favoritos"/>
-            <img src="/assets/heart-fill.svg" *ngIf="favorito" alt="Añadir a favoritos"/>
+          <button id="agrega-fav" (click)="actualizaFavorito()" type="button" class="btn" style="height: 40px;"
+                  [ngClass]="{'disabled': loadingFav }">
+            <img src="/assets/heart.svg" *ngIf="!favorito && !loadingFav" alt="Añadir a favoritos"/>
+            <img src="/assets/heart-fill.svg" *ngIf="favorito && !loadingFav" alt="Añadir a favoritos"/>
+            <span *ngIf="loadingFav" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           </button>
 
           

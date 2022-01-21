@@ -1,29 +1,16 @@
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Boostrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-    <!-- CSS file -->
-    <link rel="stylesheet" href="agregar-receta.component.css">
-</head>
 
 
-
-<form id="form-agregar-receta" class="background">
-
-    <div class="container pt-5 pb-5" >
-
-        <div class="card d-flex flex-column bg-light" style="max-width: 750px; border: solid #a47cd8 1px; border-radius: 1rem;">
+<form id="form-agregar-receta" class="background min-vh-100">
+    <div class="d-flex justify-content-center px-2 pt-5 pb-5" >
+        <div class="card d-flex flex-column bg-light" style="max-width: 750px; flex-basis:750px; border: solid #a47cd8 1px; border-radius: 1rem;">
 
           <div class="card-header" style="background-color: #9266CC; border-radius: .85rem .85rem 0 0;">
               <h4 class="text-center w-100 pt-3 text-white"> Crear receta </h4>
           </div>
 
           <div class="card-body">
+
+            <br>
 
             <!-- Nombre de receta -->
             <div class="form-group" style="max-width: 500px;">
@@ -33,6 +20,7 @@
                 <small class="text-crimson-light"> {{formErrores.nombre}} </small>
             </div>
 
+            <hr class="line">
 
             <!-- Imagen de la receta -->
             <div class="d-flex flex-column">
@@ -70,7 +58,7 @@
                 <div id="ingredients-list" class="d-flex flex-column">
 
                   <!-- Ingrediente plantilla -->
-                  <div class="form-row py-2 pl-3" style="width: fit-content"
+                  <div class="row py-2 pl-3" style="width: fit-content"
                        *ngFor="let ingrediente of formAgregaReceta.ingredientes; let index = index;">
                     <div class="col-auto">
                         <input [(ngModel)] = "ingrediente.nombre" name="ingrediente-{{index}}-nombre"
@@ -81,19 +69,17 @@
                             <input  [(ngModel)] = "ingrediente.cantidad" name="ingrediente-{{index}}-cantidad"
                                     *ngIf="medicionUsaCantidad(ingrediente.medida)" type="number" class="form-control input-underline" placeholder="1" min="0" max="9999" style="max-width: 65px; -webkit-appearance: none; -moz-appearance: textfield;">
                             <select [(ngModel)] = "ingrediente.medida" name="ingrediente-{{index}}-medida"
-                                    class="custom-select input-underline">
+                                    class="form-select input-underline">
                                 <option *ngFor="let tipo of tiposDeMedicion" [value]="tipo" >{{tipo}}</option>  
                             </select>
+                            <button id="erase-ingredient" (click)="eliminaIngrediente(index)" type="button" class="btn"  > <i class="bi bi-x-circle" style="color: #AE2538;"></i>  </button>
                         </div>
-                    </div>
-                    <div class="col-auto">
-                        <button id="erase-ingredient" (click)="eliminaIngrediente(index)" type="button" class="btn"  > <i class="bi bi-x-circle" style="color: #AE2538;"></i>  </button>
                     </div>
                   </div> <!-- Ingrediente plantilla -->
 
                 </div>
       
-                <button id ="ingredient-add" type='button' (click)="agregaIngrediente()" class="btn text-purple pu-3" style="height: 30px; width: 190px; line-height: 10px;"> 
+                <button id ="ingredient-add" type='button' (click)="agregaIngrediente()" class="btn text-purple pu-3" style="height: 30px; width: 200px; line-height: 10px;"> 
                   <i class="bi bi-plus-circle"></i> Agregar ingrediente
                 </button>
 
@@ -138,7 +124,7 @@
                 <h5 class="text-purple-dark"> Categorias de la receta  </h5>
                 <input [(ngModel)] = "formAgregaReceta.categorias" name="categorias" 
                        id="recipe-category" type="text" class="form-control" placeholder="Escriba aquí las categorias" >
-                <small class="pl-1 text-purple-light"> Separa cada categoría usando una coma "," (Ej: postre, navideño )</small>
+                <small class="pl-1 text-purple-light"> Separe las categorías usando comas "," (Ej: postre, navideño )</small>
                 <br>
                 <small class="text-crimson-light"> {{formErrores.categorias}} </small>
               </div>
@@ -151,9 +137,9 @@
               <div class="d-flex"> 
                 <input [(ngModel)] = "formAgregaReceta.tiempo" name="tiempo" (change)="redondea_tiempo()"
                      id="recipe-time" type="number" class="form-control text-purple-dark" 
-                     style="width: 50px; height: 30px; border: 0; outline: 0; background: transparent; border-radius: 0; border-bottom: 1px solid rgb(175, 154, 180); -webkit-appearance: none; -moz-appearance: textfield;" 
+                     style="width: 55px; height: 30px; border: 0; outline: 0; background: transparent; border-radius: 0; border-bottom: 1px solid rgb(175, 154, 180); -webkit-appearance: none; -moz-appearance: textfield;" 
                      min="0" max="999" placeholder="0" >
-                <span class="pl-2 text-purple-dark" style="line-height: 40px;"> minutos </span>   
+                <span class="mx-2 text-purple-dark" style="line-height: 40px;"> minutos </span>   
               </div>
               <small class="text-crimson-light"> {{formErrores.tiempo}} </small>
             </div>

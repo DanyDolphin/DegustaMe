@@ -15,7 +15,7 @@ export class SeguimientoRecetasComponent implements OnInit {
 
   ngOnInit(): void {
     //obtengo el seguimiento de recetas del usuario
-    this.loading = false
+    this.loading = true
    this.servicioReceta.obtenSeguimientoRecetas().subscribe(
       seguimientos => {
         this.seguimiento = seguimientos.recetas
@@ -35,6 +35,10 @@ export class SeguimientoRecetasComponent implements OnInit {
       }
 
     )
+  }
+
+  formatea_desc( text: string){
+    return text.substring(1,100) + "..."
   }
 
   eliminarseguimientoReceta(id:any){

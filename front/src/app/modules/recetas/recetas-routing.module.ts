@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetallesRecetaComponent } from './pages/detalles-receta/detalles-receta.component';
 import { ListaRecetasComponent } from './pages/lista-recetas/lista-recetas.component';
 import { AgregarRecetaComponent } from './pages/agregar-receta/agregar-receta.component';
+import { MisRecetasComponent } from './pages/mis-recetas/mis-recetas.component';
 import  { SeguimientoRecetasComponent } from './pages/seguimiento-recetas/seguimiento-recetas.component';
 
 const routes: Routes = [
@@ -22,9 +23,12 @@ const routes: Routes = [
     path: 'busqueda/:query',
     component: ListaRecetasComponent
   },{
+    path: 'misrecetas',
+    component: MisRecetasComponent
+  },{
     path: ':id',
     component: DetallesRecetaComponent
-  },
+  }
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ export class DetallesRecetaComponent implements OnInit {
   receta: any
 
   favorito = false;
+  loadingFav = false;
 
   constructor(
     private recetasService: RecetasService,
@@ -34,6 +35,7 @@ export class DetallesRecetaComponent implements OnInit {
   }
 
   actualizaFavorito(){
+    this.loadingFav = true;
     this.recetasService.verificaSeguimientoReceta(this.receta.receta_id).subscribe(
       respuesta => {
         this.favorito = respuesta.valor;
@@ -48,6 +50,7 @@ export class DetallesRecetaComponent implements OnInit {
     console.log("Haciendo peticion para agregar a seguimiento <" + this.receta.receta_id + ">")
     this.recetasService.agregarSeguimientoReceta(this.receta.receta_id).subscribe(
       respuesta => {
+        this.loadingFav = false;
         this.favorito = true;
           Swal.fire({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
             title: 'Exito',
@@ -56,6 +59,7 @@ export class DetallesRecetaComponent implements OnInit {
           }) 
         },
       error => {
+          this.loadingFav = false;
           console.error(error)
           Swal.fire('Error del servidor', 'Favor de intentarlo de nuevo', 'error')
         }
@@ -67,6 +71,7 @@ export class DetallesRecetaComponent implements OnInit {
     this.recetasService.eliminarSeguimientoReceta(this.receta.receta_id).subscribe(
       respuesta => {
           this.favorito = false;
+          this.loadingFav = false;
           Swal.fire({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
             title: 'Exito',
             html: `<h3>La receta se ha eliminado de tu lista de seguimiento</h3><br>`,
@@ -74,6 +79,7 @@ export class DetallesRecetaComponent implements OnInit {
           }) 
         },
       error => {
+        this.loadingFav = false;
           console.error(error)
           Swal.fire('Error del servidor', 'Favor de intentarlo de nuevo', 'error')
         }

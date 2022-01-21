@@ -29,13 +29,6 @@ def consultar_recomendaciones():
     session.close()
     return jsonify(recetas)
 
-@bp.route('/<id>', methods=['GET'])
-def consultar_receta(id):
-    session = Session()
-    receta = session.query(Receta).get(id).to_dict()
-    session.close()
-    return jsonify(receta)
-
 @bp.route('/search/<query>', methods=['GET'])
 def buscar_recetas(query):
     session = Session()
@@ -58,7 +51,6 @@ def obten_categorias():
 @login_required
 def seguimiento_recetas():
     session = Session()
-    print("ENTREEEEE")
     print(g.user)
     seguimiento_recetas= session.query(UsuarioReceta).filter(UsuarioReceta.nombre_usuario==g.user['username']).all()
     recetas = []
@@ -66,6 +58,26 @@ def seguimiento_recetas():
         receta=session.query(Receta).get(rec.receta_id)
         recetas.append(receta.to_dict())
     return jsonify({'recetas':recetas})
+
+@bp.route('/misrecetas', methods=['GET'])
+@login_required
+def consultar_mis_recetas():
+  session = Session()
+  misrecetas_query = session.query(Receta).filter(Receta.nombre_usuario == g.user['username']).all()
+  misrecetas = []
+  for receta in misrecetas_query:
+    misrecetas.append(receta.to_dict())
+  return jsonify({'recetas':misrecetas})
+
+@bp.route('/<id>', methods=['GET'])
+def consultar_receta(id):
+    session = Session()
+    receta = session.query(Receta).get(id)
+    if receta == None:
+      return  jsonify({"error": "La receta <" + str(id) +"> no existe."})
+    receta = receta.to_dict()
+    session.close()
+    return jsonify(receta)
 
 @bp.route('/<id>', methods=['DELETE'])
 @login_required
@@ -78,6 +90,7 @@ def eliminar_seguimiento_receta(id):
 
 
 @bp.route('/seguimiento/agrega/<idReceta>', methods=['POST'])
+@login_required
 def agregar_seguimiento_receta(idReceta):
     session = Session()
     receta  = session.query(Receta).filter_by(receta_id=idReceta).first()
@@ -113,6 +126,7 @@ def verifica_seguimiento_receta(idReceta):
 
 
 @bp.route('/agrega', methods=['POST'])
+@login_required
 def agrega_receta():
     session = Session()
     nombre = request.json['nombre'].strip().lower()
@@ -121,19 +135,23 @@ def agrega_receta():
     tiempo = request.json['tiempo']
     categorias = request.json['categorias'].strip()
     ingredientes = request.json['ingredientes']
+    usuario = session.query(Usuario).get(g.user['username'])
+
+    if usuario == None:
+       return jsonify(dict({"error": 100, "server": "El usuario que desea agregar la receta no existe"}))
 
     descripcion = ""
     for paso in pasos:
       descripcion +=  "• " + paso["descripcion"].strip() + "\n"
 
-    receta = Receta(nombre, imagen, descripcion, tiempo, categorias)
+    receta = Receta(nombre, imagen, descripcion, tiempo, categorias, usuario)
 
     try:
       session.add(receta)
       session.commit()
     except:
       session.rollback()
-      return jsonify(dict(mensaje= "server: Ha ocurrido un error, porfavor intentelo mas tarde")), 500 
+      return jsonify(dict({"error": 500, "server": "Ha ocurrido un error, porfavor intentelo más tarde"}))
 
     for _ingrediente in ingredientes:
         nombre = _ingrediente["nombre"]
@@ -151,6 +169,7 @@ def agrega_receta():
 
 
 @bp.route('/elimina/<idReceta>', methods=['DELETE'])
+@login_required
 def elimina_receta(idReceta):  
     session = Session()
     receta_eliminar = session.query(Receta).filter_by(receta_id=idReceta).first()

@@ -56,4 +56,9 @@ export class RecetasService {
   eliminarReceta( id: string ): Observable<any> {
     return this.http.delete(`${API_BASE}/recetas/elimina/${id}`);
   }
+
+  obtenMisRecetas() {
+    return this.http.get<any>(`${API_BASE}/recetas/misrecetas`)
+  }
+  
 }
