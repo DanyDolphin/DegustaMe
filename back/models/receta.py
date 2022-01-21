@@ -1,12 +1,13 @@
 # SQLAlchemy
-
-from sqlalchemy import Column, String, Integer, Text, Numeric, Table, ForeignKey
+from sqlalchemy import Column, String, Integer, Numeric, Text
 from sqlalchemy.orm import relationship
 from models.receta_ingrediente import RecetaIngrediente
 
 # models
 from models.conexion_bd import Base
+from models.receta_ingrediente import RecetaIngrediente
 from models.ingrediente import Ingrediente
+
 
 class Receta(Base):
 
@@ -18,7 +19,6 @@ class Receta(Base):
     tiempo = Column(Integer)
     tipo = Column(String)
     ingredientes = relationship(RecetaIngrediente, cascade="all, delete-orphan", backref="receta")
-
 
     def __init__(self, nombre, imagen, descripcion, tiempo, tipo):
         self.nombre = nombre

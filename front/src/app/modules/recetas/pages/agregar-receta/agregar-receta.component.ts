@@ -227,16 +227,16 @@ export class AgregarRecetaComponent implements OnInit {
         respuesta => {
             Swal.fire({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
               title: 'Exito',
-              html: `<h3>La receta se ha<b>registrado exitosamente</b></h3><br>`,
+              html: `<h3>La receta se ha <br><b>registrado exitosamente</b></h3><br>`,
               icon: 'success'
             }) 
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['']);
           },
         error => {
             console.error(error)
             Swal.fire('Error del servidor', 'Favor de intentarlo de nuevo', 'error')
           }
-        );
+    );
   }
 
 
