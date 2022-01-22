@@ -37,7 +37,7 @@
   
         <h2 class="mt-4">Preparación</h2>
         <app-skeleton *ngIf="!receta" skeletonClass="skeleton-text"></app-skeleton>
-        <div [innerHtml]="descripcion"></div>
+        <ol [innerHtml]="descripcion"></ol>
       </div>
   
       <div class="col-lg-4">
