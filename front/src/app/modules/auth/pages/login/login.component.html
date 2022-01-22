@@ -26,10 +26,10 @@
                                 <h3 class="mb-5">Iniciar Sesión</h3>
                                 <form [formGroup]="exform" >
 
-                                    <!--Correo electronico -->
+                                    <!--usuario -->
                                     <div class="form-group mb-4">
-                                        <input formControlName="usuario" type="email" class="form-control" id="floatingInput" placeholder="Correo electrónico">
-                                        <small *ngIf="usuario?.invalid && usuario.touched" class="text-mor">El correo eléctrónico es requerido</small>
+                                        <input formControlName="usuario" type="email" class="form-control" id="floatingInput" placeholder="Nombre de usuario">
+                                        <small *ngIf="usuario?.invalid && usuario.touched" class="text-mor">El nombre de usuario es requerido</small>
                                     </div>
 
                                     <!--Contraseña-->
