@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecetasService } from 'src/app/shared/services/recetas.service';
 import Swal from 'sweetalert2';
 
@@ -17,11 +17,17 @@ export class DetallesRecetaComponent implements OnInit {
 
   constructor(
     private recetasService: RecetasService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   get descripcion(): string {
-    return this.receta?.descripcion?.replace(/•/g, '<br/>')
+    if (!this.receta) return ''
+    return this.receta.descripcion
+      .split(/•/g)
+      .filter((paso: string) => !!paso)
+      .map((paso: string) => `<li>${paso}</li>`)
+      .join('')
   }
 
   ngOnInit(): void {
@@ -35,6 +41,11 @@ export class DetallesRecetaComponent implements OnInit {
   }
 
   actualizaFavorito(){
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['/auth/login'])
+      return
+    }
+      
     this.loadingFav = true;
     this.recetasService.verificaSeguimientoReceta(this.receta.receta_id).subscribe(
       respuesta => {
